@@ -1,6 +1,0 @@
-F:\Projects\tst\tst\bin\Debug\tst.exe.config
-F:\Projects\tst\tst\bin\Debug\tst.exe
-F:\Projects\tst\tst\bin\Debug\tst.pdb
-F:\Projects\tst\tst\obj\Debug\tst.csprojResolveAssemblyReference.cache
-F:\Projects\tst\tst\obj\Debug\tst.exe
-F:\Projects\tst\tst\obj\Debug\tst.pdb
