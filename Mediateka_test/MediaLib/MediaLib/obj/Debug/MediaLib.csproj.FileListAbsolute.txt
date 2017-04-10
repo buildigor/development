@@ -1,0 +1,5 @@
+F:\Projects\lessons\epam\MediaLib\MediaLib\obj\Debug\MediaLib.csprojResolveAssemblyReference.cache
+F:\Projects\lessons\epam\MediaLib\MediaLib\bin\Debug\MediaLib.dll
+F:\Projects\lessons\epam\MediaLib\MediaLib\bin\Debug\MediaLib.pdb
+F:\Projects\lessons\epam\MediaLib\MediaLib\obj\Debug\MediaLib.dll
+F:\Projects\lessons\epam\MediaLib\MediaLib\obj\Debug\MediaLib.pdb

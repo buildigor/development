@@ -1,0 +1,8 @@
+F:\Projects\lessons\epam\MediaLib\Demo\bin\Debug\Demo.exe.config
+F:\Projects\lessons\epam\MediaLib\Demo\bin\Debug\Demo.exe
+F:\Projects\lessons\epam\MediaLib\Demo\bin\Debug\Demo.pdb
+F:\Projects\lessons\epam\MediaLib\Demo\bin\Debug\MediaLib.dll
+F:\Projects\lessons\epam\MediaLib\Demo\bin\Debug\MediaLib.pdb
+F:\Projects\lessons\epam\MediaLib\Demo\obj\Debug\Demo.csprojResolveAssemblyReference.cache
+F:\Projects\lessons\epam\MediaLib\Demo\obj\Debug\Demo.exe
+F:\Projects\lessons\epam\MediaLib\Demo\obj\Debug\Demo.pdb
