@@ -35,6 +35,9 @@ namespace Demo
             Console.WriteLine(series.ShowAll());
             disk.AddToDisk( picture); 
             Console.WriteLine(disk.AddToDisk( mediaTrack ));
+            VideoPicture videoPicture = new VideoPicture();
+            videoPicture.AddToVideoPicture(picture);
+            Console.WriteLine(videoPicture.ShowAll());
                
 
             Console.ReadLine();

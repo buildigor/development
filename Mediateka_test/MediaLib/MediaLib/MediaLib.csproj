@@ -48,6 +48,7 @@
     <Compile Include="IAudioElement.cs" />
     <Compile Include="IItem.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="IVideoPicture.cs" />
     <Compile Include="LinkItem.cs" />
     <Compile Include="AudioTrack.cs" />
     <Compile Include="Picture.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Selection.cs" />
     <Compile Include="Series.cs" />
     <Compile Include="Video.cs" />
+    <Compile Include="VideoPicture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
