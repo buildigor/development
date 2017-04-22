@@ -45,6 +45,10 @@
     <Compile Include="Classes\ChocolateCandy.cs" />
     <Compile Include="Classes\Gift.cs" />
     <Compile Include="Classes\LollipopCandy.cs" />
+    <Compile Include="Classes\NewYearsGift.cs" />
+    <Compile Include="Classes\Package.cs" />
+    <Compile Include="Classes\StickOfConfectionery.cs" />
+    <Compile Include="Classes\Wafer.cs" />
     <Compile Include="Interfaces\IGift.cs" />
     <Compile Include="Interfaces\IPackage.cs" />
     <Compile Include="Interfaces\ISweets.cs" />
