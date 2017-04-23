@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task1.Interfaces
 {
-   public interface ISweets:ICost
+   public interface ICost
     {
-       string Name { get;  }
-       double Weight { get;  }
-       double Sugar { get; }
+        double Cost { get; }
     }
 }

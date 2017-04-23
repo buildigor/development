@@ -10,8 +10,8 @@ namespace Task1.Classes
     {
         private readonly double _cacaocount;
         public double CacaoCount { get { return _cacaocount; } }
-        public ChocolateCandy(string name, double weight, double sugar, string form, double cacaocount)
-            : base(name, weight, sugar, form)
+        public ChocolateCandy(string name, double weight, double sugar, string form, double cacaocount,double cost)
+            : base(name, weight, sugar, form,cost)
         {
             _cacaocount = cacaocount;
         }

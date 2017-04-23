@@ -14,6 +14,8 @@ namespace Task1.Classes
 
         public double GiftWeight { get; protected set; }
         public double CandiesWeight { get; protected set; }
+        public double GiftCost { get; protected set; }
+        public double CandiesCost { get; protected set; }
 
         public override void Add(ISweets sweets)
         {
@@ -23,9 +25,11 @@ namespace Task1.Classes
             }
             _candies.Add(sweets);
             GiftWeight += sweets.Weight;
+            GiftCost += sweets.Cost;
             if (sweets is Candy)
             {
                 CandiesWeight += sweets.Weight;
+                CandiesCost += sweets.Cost;
             }
 
         }
@@ -42,12 +46,13 @@ namespace Task1.Classes
 
         }
 
-        public override IEnumerable<Candy> OrderBy<R>(Func<ISweets, R> comparerFunc)
+        public override IEnumerable<Candy> OrderBy<TR>(Func<ISweets, TR> comparerFunc)
         {
 
             return _candies.OrderBy(comparerFunc).OfType<Candy>().ToList();
 
         }
+
         public IEnumerator<ISweets> GetEnumerator()
         {
             return _candies.GetEnumerator();
@@ -58,5 +63,6 @@ namespace Task1.Classes
             return GetEnumerator();
         }
 
+        
     }
 }

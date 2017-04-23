@@ -10,7 +10,7 @@ namespace Task1.Classes
     {
         private readonly string _jelly;
         public string Jelly { get { return _jelly; } }
-        public FrutCandy(string name, double weight, double sugar, string form,string jelly) : base(name, weight, sugar, form)
+        public FrutCandy(string name, double weight, double sugar, string form, string jelly,double cost) : base(name, weight, sugar, form,cost)
         {
             _jelly = jelly;
         }

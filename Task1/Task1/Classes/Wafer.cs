@@ -13,12 +13,16 @@ namespace Task1.Classes
         public double Weight { get; private set; }
         public double Sugar { get; private set; }
         public int WaferCount { get; private set; }
-        public Wafer(string name, double weight, double sugar, int waferCount)
+        public double Cost { get; private set; }
+        public Wafer(string name, double weight, double sugar, int waferCount, double cost)
         {
             Name = name;
             Weight = weight;
             Sugar = sugar;
             WaferCount = waferCount;
+            Cost = cost;
         }
+
+        
     }
 }

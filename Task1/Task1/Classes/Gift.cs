@@ -19,5 +19,7 @@ namespace Task1.Classes
 
         public virtual IEnumerable<Candy> OrderBy<R>(Func<ISweets, R> comparerFunc)
         { return new List<Candy>(); }
+
+        
     }
 }

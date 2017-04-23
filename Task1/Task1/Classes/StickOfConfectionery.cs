@@ -13,6 +13,7 @@ namespace Task1.Classes
         private readonly double _weight;
         private readonly double _sugar;
         private readonly double _hazelnut;
+        private readonly double _cost;
 
         public string Name
         {
@@ -34,12 +35,19 @@ namespace Task1.Classes
             get { return _hazelnut; }
         }
 
-        public StickOfConfectionery(string name, double weight, double sugarcount, double hazelnut)
+        public double Cost
+        {
+            get { return _cost; }
+        }
+        public StickOfConfectionery(string name, double weight, double sugarcount, double hazelnut,double cost)
         {
             _name = name;
             _weight = weight;
             _sugar = sugarcount;
             _hazelnut = hazelnut;
+            _cost = cost;
         }
+
+        
     }
 }
