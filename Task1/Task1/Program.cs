@@ -40,7 +40,7 @@ namespace Task1
             Console.WriteLine(gift.GetAllCandies().ListAllToString());
             Console.WriteLine("*********************Finded Candyes******************");
             Console.WriteLine(gift.FindCandies(1, 7).ListCandyToString());
-            Console.WriteLine("*********************Ordered Candyes*****************");
+            Console.WriteLine("*********************Ordered Candyes By Name*********");
             Console.WriteLine(gift.OrderBy(x => x.Name).ListCandyToString());
             Console.WriteLine(gift.GetType().Name + " in "+package.Material+" package " + package.Color);
             Console.ReadLine();
