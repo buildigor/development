@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Classes\Candy.cs" />
     <Compile Include="Classes\ChocolateCandy.cs" />
+    <Compile Include="Classes\Extension.cs" />
     <Compile Include="Classes\Gift.cs" />
     <Compile Include="Classes\LollipopCandy.cs" />
     <Compile Include="Classes\NewYearsGift.cs" />
