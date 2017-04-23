@@ -15,15 +15,18 @@ namespace Task1
         static void Main(string[] args)
         {
             LollipopCandy lollipop = new LollipopCandy("Dushes lollipopCandy", 2, 1.5, "circle", "green");
-            ChocolateCandy chocolateCandy = new ChocolateCandy("ChocolateCandy", 5, 3, "rectangular", 4);
+            ChocolateCandy chocolateCandy = new ChocolateCandy("Chocolate Candy", 5, 3, "rectangular", 4);
+            MilkCandy milkCandy = new MilkCandy("Korovka", 3, 2, "rectangular",1);
+            FrutCandy frutCandy = new FrutCandy("Abricosovye Candy",2.4,1.2,"elliptical","apricot");
             StickOfConfectionery stickOfConfectioneryS = new StickOfConfectionery("Snikers stickOfConfectionery", 35, 27, 15);
             StickOfConfectionery stickOfConfectioneryM = new StickOfConfectionery("Mars stickOfConfectionery", 25, 15, 20);
             Wafer wafer = new Wafer("Chernomorskie wafers", 6, 3, 2);
             NewYearsGift gift = new NewYearsGift
             {
-                lollipop,chocolateCandy,stickOfConfectioneryM,stickOfConfectioneryS,wafer
+                lollipop,chocolateCandy,stickOfConfectioneryM,stickOfConfectioneryS,wafer,milkCandy,frutCandy
             };
-            Package package = new Package("green", gift);
+            Package package = new Package("cellophane","green", gift);
+            
             Console.WriteLine("*********************Total Weight Candies******");
             Console.WriteLine(gift.CandiesWeight);
             Console.WriteLine("*********************Total Weight NewYearsGift******");
@@ -34,7 +37,7 @@ namespace Task1
             Console.WriteLine(gift.FindCandies(1, 7).ListCandyToString());
             Console.WriteLine("*********************Ordered Candyes*****************");
             Console.WriteLine(gift.OrderBy(x => x.Name).ListCandyToString());
-            Console.WriteLine(gift.GetType().Name + " in package " + package.Color);
+            Console.WriteLine(gift.GetType().Name + " in "+package.Material+" package " + package.Color);
             Console.ReadLine();
         }
     }

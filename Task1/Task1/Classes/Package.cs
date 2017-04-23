@@ -9,14 +9,17 @@ namespace Task1.Classes
 {
     public class Package : IPackage
     {
-        private readonly Gift _newYearsGift;
+        private  Gift _newYearsGift;
+
         public string Color { get; private set; }
-        public Package(string color, Gift newYearsGift)
+        public string Material { get; set; }
+
+        public Package(string material,string color, Gift newYearsGift)
         {
-            _newYearsGift = newYearsGift;
+            Material = material;
             Color = color;
+            _newYearsGift = newYearsGift;
+            
         }
-
-
     }
 }

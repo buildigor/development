@@ -9,5 +9,6 @@ namespace Task1.Interfaces
    public interface IPackage
    {
        string Color { get; }
+       string Material { get; set; }
    }
 }
