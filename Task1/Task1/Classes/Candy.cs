@@ -7,7 +7,7 @@ using Task1.Interfaces;
 
 namespace Task1.Classes
 {
-    public abstract class Candy : ISweets,ICost
+    public abstract class Candy : ISweets
     {
         private readonly string _name;
         private readonly double _weight;

@@ -41,7 +41,12 @@ namespace Task1
             Console.WriteLine("*********************Finded Candyes******************");
             Console.WriteLine(gift.FindCandies(1, 7).ListCandyToString());
             Console.WriteLine("*********************Ordered Candyes By Name*********");
-            Console.WriteLine(gift.OrderBy(x => x.Name).ListCandyToString());
+            Console.WriteLine(gift.OrderCandyBy(x => x.Name).ListCandyToString());
+
+            Console.WriteLine("*********************Finded Sweets******************");
+            Console.WriteLine(gift.FindSweets(3,15).ListAllToString());
+            Console.WriteLine("*********************Ordered Sweets By Name*********");
+            Console.WriteLine(gift.OrderSweetsBy(x=>x.Name).ListAllToString());
             Console.WriteLine(gift.GetType().Name + " in "+package.Material+" package " + package.Color);
             Console.ReadLine();
         }

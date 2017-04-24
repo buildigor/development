@@ -26,12 +26,9 @@ namespace Task1.Classes
             _candies.Add(sweets);
             GiftWeight += sweets.Weight;
             GiftCost += sweets.Cost;
-            if (sweets is Candy)
-            {
-                CandiesWeight += sweets.Weight;
-                CandiesCost += sweets.Cost;
-            }
-
+            if (!(sweets is Candy)) return;
+            CandiesWeight += sweets.Weight;
+            CandiesCost += sweets.Cost;
         }
         public override IEnumerable<ISweets> GetAllCandies()
         {
@@ -46,11 +43,23 @@ namespace Task1.Classes
 
         }
 
-        public override IEnumerable<Candy> OrderBy<TR>(Func<ISweets, TR> comparerFunc)
+        public override IEnumerable<ISweets> FindSweets(double minSugarCount, double maxSugarCount)
+        {
+
+            return _candies.Where(x => x.Sugar >= minSugarCount && x.Sugar <= maxSugarCount).ToList();
+
+        }
+
+        public override IEnumerable<Candy> OrderCandyBy<TR>(Func<ISweets, TR> comparerFunc)
         {
 
             return _candies.OrderBy(comparerFunc).OfType<Candy>().ToList();
 
+        }
+
+        public override IEnumerable<ISweets> OrderSweetsBy<TR>(Func<ISweets, TR> comparerFunc)
+        {
+            return _candies.OrderBy(comparerFunc).ToList();
         }
 
         public IEnumerator<ISweets> GetEnumerator()
