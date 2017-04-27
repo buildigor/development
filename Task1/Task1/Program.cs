@@ -21,11 +21,11 @@ namespace Task1
             StickOfConfectionery stickOfConfectioneryS = new StickOfConfectionery("Snikers stickOfConfectionery", 35, 27, 15,15);
             StickOfConfectionery stickOfConfectioneryM = new StickOfConfectionery("Mars stickOfConfectionery", 25, 15, 20,13);
             Wafer wafer = new Wafer("Chernomorskie wafers", 6, 3, 2,11);
-         
-            NewYearsGift gift = new NewYearsGift
-            {
-                lollipop,chocolateCandy,stickOfConfectioneryM,stickOfConfectioneryS,wafer,milkCandy,frutCandy
-            };
+
+            NewYearsGift gift =
+                new NewYearsGift(new List<ISweets>()){lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
+                        frutCandy};
+          
             Package package = new Package("cellophane","green", gift);
             
             Console.WriteLine("*********************Total Weight Candies************");
@@ -37,7 +37,7 @@ namespace Task1
             Console.WriteLine("*********************Total Cost NewYearsGift*********");
             Console.WriteLine(gift.GiftCost);
             Console.WriteLine("*********************All Sweets**********************");
-            Console.WriteLine(gift.GetAllCandies().ListAllToString());
+            Console.WriteLine(gift.GetAllSweets().ListAllToString());
             Console.WriteLine("*********************Finded Candyes******************");
             Console.WriteLine(gift.FindCandies(1, 7).ListCandyToString());
             Console.WriteLine("*********************Ordered Candyes By Name*********");
@@ -48,6 +48,7 @@ namespace Task1
             Console.WriteLine("*********************Ordered Sweets By Name*********");
             Console.WriteLine(gift.OrderSweetsBy(x=>x.Name).ListAllToString());
             Console.WriteLine(gift.GetType().Name + " in "+package.Material+" package " + package.Color);
+
             Console.ReadLine();
         }
     }

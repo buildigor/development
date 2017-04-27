@@ -10,8 +10,8 @@ namespace Task1.Classes
     public abstract class Gift
     {
         public abstract void Add(ISweets sweets);
-
-        public virtual IEnumerable<ISweets> GetAllCandies()
+        public abstract void Remove(ISweets sweets);
+        public virtual IEnumerable<ISweets> GetAllSweets()
         { return new List<ISweets>(); }
 
         public virtual IEnumerable<Candy> FindCandies(double minSugarCount, double maxSugarCount)

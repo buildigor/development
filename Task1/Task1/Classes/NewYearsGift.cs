@@ -10,7 +10,12 @@ namespace Task1.Classes
 {
     public class NewYearsGift : Gift, IGift
     {
-        private readonly ICollection<ISweets> _candies = new List<ISweets>();
+        private readonly ICollection<ISweets> _sweets;
+
+        public NewYearsGift(ICollection<ISweets> sweets)
+        {
+            _sweets = sweets;
+        }
 
         public double GiftWeight { get; protected set; }
         public double CandiesWeight { get; protected set; }
@@ -23,48 +28,59 @@ namespace Task1.Classes
             {
                 throw new ArgumentNullException();
             }
-            _candies.Add(sweets);
+            _sweets.Add(sweets);
             GiftWeight += sweets.Weight;
             GiftCost += sweets.Cost;
             if (!(sweets is Candy)) return;
             CandiesWeight += sweets.Weight;
             CandiesCost += sweets.Cost;
         }
-        public override IEnumerable<ISweets> GetAllCandies()
+
+        public override void Remove(ISweets sweets)
+        {
+            _sweets.Remove(sweets);
+            GiftWeight -= sweets.Weight;
+            GiftCost -= sweets.Cost;
+            if (!(sweets is Candy)) return;
+            CandiesWeight -= sweets.Weight;
+            CandiesCost -= sweets.Cost;
+        }
+
+        public override IEnumerable<ISweets> GetAllSweets()
         {
 
-            return _candies.ToList();
+            return _sweets.ToList();
 
         }
         public override IEnumerable<Candy> FindCandies(double minSugarCount, double maxSugarCount)
         {
 
-            return _candies.Where(x => x is Candy && x.Sugar >= minSugarCount && x.Sugar <= maxSugarCount).Select(a => (Candy)a).ToList();
+            return _sweets.Where(x => x is Candy && x.Sugar >= minSugarCount && x.Sugar <= maxSugarCount).Select(a => (Candy)a).ToList();
 
         }
 
         public override IEnumerable<ISweets> FindSweets(double minSugarCount, double maxSugarCount)
         {
 
-            return _candies.Where(x => x.Sugar >= minSugarCount && x.Sugar <= maxSugarCount).ToList();
+            return _sweets.Where(x => x.Sugar >= minSugarCount && x.Sugar <= maxSugarCount).ToList();
 
         }
 
         public override IEnumerable<Candy> OrderCandyBy<TR>(Func<ISweets, TR> comparerFunc)
         {
 
-            return _candies.OrderBy(comparerFunc).OfType<Candy>().ToList();
+            return _sweets.OrderBy(comparerFunc).OfType<Candy>().ToList();
 
         }
 
         public override IEnumerable<ISweets> OrderSweetsBy<TR>(Func<ISweets, TR> comparerFunc)
         {
-            return _candies.OrderBy(comparerFunc).ToList();
+            return _sweets.OrderBy(comparerFunc).ToList();
         }
 
         public IEnumerator<ISweets> GetEnumerator()
         {
-            return _candies.GetEnumerator();
+            return _sweets.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
