@@ -38,6 +38,10 @@ namespace Task1.Classes
 
         public override void Remove(ISweets sweets)
         {
+            if (sweets == null)
+            {
+                throw new ArgumentNullException();
+            }
             _sweets.Remove(sweets);
             GiftWeight -= sweets.Weight;
             GiftCost -= sweets.Cost;
