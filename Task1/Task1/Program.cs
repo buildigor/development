@@ -25,36 +25,35 @@ namespace Task1
             ISweets stickOfConfectioneryM = factory.CreateStickOfConfectionery("Mars stickOfConfectionery", 25, 15, 20,
                 13);
             ISweets wafer = factory.CreateWafer("Chernomorskie wafers", 6, 3, 2, 11);
-            NewYearsGift gift =new NewYearsGift();
-            gift.Add(new[] {lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
-                       frutCandy});
-            //gift.Add(new List<ISweets> {lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
-            //            frutCandy});
-            
-           
-
+            NewYearsGift gift = new NewYearsGift
+            {
+                new [] // new List<ISweets>
+                {
+                    lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
+                    frutCandy
+                }
+            };
             Package package = new Package("cellophane","green", gift);
             
             Console.WriteLine("*********************Total Weight Candies************");
             Console.WriteLine(gift.CandiesWeight);
             Console.WriteLine("*********************Total Cost Candies**************");
             Console.WriteLine(gift.CandiesCost);
+
             Console.WriteLine("*********************Total Weight NewYearsGift*******");
             Console.WriteLine(gift.GiftWeight);
             Console.WriteLine("*********************Total Cost NewYearsGift*********");
             Console.WriteLine(gift.GiftCost);
-            Console.WriteLine("*********************All Sweets**********************");
-           
 
+            Console.WriteLine("*********************All Sweets**********************");
             Console.WriteLine(gift.GetAllSweets().ListAllToString());
             Console.WriteLine("*********************Finded Candyes******************");
             Console.WriteLine(gift.FindCandies(1, 7).ListCandyToString());
             Console.WriteLine("*********************Ordered Candyes By Name*********");
             Console.WriteLine(gift.OrderCandyBy(x => x.Name).ListCandyToString());
-
-            Console.WriteLine("*********************Finded Sweets******************");
+            Console.WriteLine("*********************Finded Sweets*******************");
             Console.WriteLine(gift.FindSweets(3,15).ListAllToString());
-            Console.WriteLine("*********************Ordered Sweets By Name*********");
+            Console.WriteLine("*********************Ordered Sweets By Name**********");
             Console.WriteLine(gift.OrderSweetsBy(x=>x.Name).ListAllToString());
             Console.WriteLine(gift.GetType().Name + " in "+package.Material+" package " + package.Color);
 

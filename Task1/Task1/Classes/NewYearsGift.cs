@@ -97,15 +97,7 @@ namespace Task1.Classes
         {
             return _sweets.OrderBy(comparerFunc).ToList();
         }
-        //public override IEnumerator<ISweets> GetEnumerator()
-        //{
-        //    return _sweets.GetEnumerator();
-        //}
-
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return GetEnumerator();
-        //}
+        
 
         
     }

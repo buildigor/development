@@ -36,5 +36,6 @@ namespace Task1.Classes
       {
           return  new StickOfConfectionery(name,weight,sugarcount,hazelnut,cost);
       }
+
     }
 }
