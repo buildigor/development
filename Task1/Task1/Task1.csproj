@@ -51,8 +51,9 @@
     <Compile Include="Classes\NewYearsGift.cs" />
     <Compile Include="Classes\Package.cs" />
     <Compile Include="Classes\StickOfConfectionery.cs" />
+    <Compile Include="Classes\SweetsFactory.cs" />
     <Compile Include="Classes\Wafer.cs" />
-    <Compile Include="Interfaces\ICost.cs" />
+    <Compile Include="Interfaces\IProduct.cs" />
     <Compile Include="Interfaces\IGift.cs" />
     <Compile Include="Interfaces\IPackage.cs" />
     <Compile Include="Interfaces\ISweets.cs" />

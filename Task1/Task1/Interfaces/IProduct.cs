@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1.Interfaces
 {
-   public interface ICost
+   public interface IProduct
     {
         double Cost { get; }
     }

@@ -8,20 +8,36 @@ using Task1.Interfaces;
 
 namespace Task1.Classes
 {
-    public class NewYearsGift : Gift, IGift
+    public class NewYearsGift : Gift
     {
         private readonly ICollection<ISweets> _sweets;
 
-        public NewYearsGift(ICollection<ISweets> sweets)
+        public NewYearsGift()
         {
-            _sweets = sweets;
+            _sweets = new List<ISweets>();
+           
         }
 
-        public double GiftWeight { get; protected set; }
+
+        //public double GiftWeight { get; protected set; }
         public double CandiesWeight { get; protected set; }
         public double GiftCost { get; protected set; }
         public double CandiesCost { get; protected set; }
 
+        public void Add(IEnumerable<ISweets> sweetses)
+        {
+            foreach (ISweets sweet in sweetses)
+            {
+                Add(sweet);
+            }
+        }
+        public void Remove(IEnumerable<ISweets> sweetses)
+        {
+            foreach (ISweets sweetse in sweetses)
+            {
+                Remove(sweetse);
+            }
+        }
         public override void Add(ISweets sweets)
         {
             if (sweets == null)
@@ -81,16 +97,15 @@ namespace Task1.Classes
         {
             return _sweets.OrderBy(comparerFunc).ToList();
         }
+        //public override IEnumerator<ISweets> GetEnumerator()
+        //{
+        //    return _sweets.GetEnumerator();
+        //}
 
-        public IEnumerator<ISweets> GetEnumerator()
-        {
-            return _sweets.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return GetEnumerator();
+        //}
 
         
     }

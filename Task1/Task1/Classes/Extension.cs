@@ -13,9 +13,11 @@ namespace Task1.Classes
         {
             return list.Aggregate<ISweets, string>(null, (current, sweets) => current + (sweets.Name + "\n"));
         }
-        public static string ListAllToString(this IEnumerable<ISweets> list)
+
+       public static string ListAllToString(this IEnumerable<ISweets> list)
         {
-            return list.Aggregate<ISweets, string>(null, (current, sweets) => current + (sweets.Name + "\n"));
+
+             return list.Aggregate<ISweets, string>(null, (current, sweets) => current + (sweets.Name + "\n"));
         }
     }
 }

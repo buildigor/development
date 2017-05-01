@@ -14,18 +14,25 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            LollipopCandy lollipop = new LollipopCandy("Dushes lollipopCandy", 2, 1.5, "circle", "green",5);
-            ChocolateCandy chocolateCandy = new ChocolateCandy("Chocolate Candy", 5, 3, "rectangular", 4,10);
-            MilkCandy milkCandy = new MilkCandy("Korovka", 3, 2, "rectangular",1,7);
-            FrutCandy frutCandy = new FrutCandy("Abricosovye Candy",2.4,1.2,"elliptical","apricot",6);
-            StickOfConfectionery stickOfConfectioneryS = new StickOfConfectionery("Snikers stickOfConfectionery", 35, 27, 15,15);
-            StickOfConfectionery stickOfConfectioneryM = new StickOfConfectionery("Mars stickOfConfectionery", 25, 15, 20,13);
-            Wafer wafer = new Wafer("Chernomorskie wafers", 6, 3, 2,11);
+           
+            SweetsFactory factory = new SweetsFactory();
+            ISweets lollipop = factory.CreateLollipopCandy("Dushes lollipopCandy", 2, 1.5, "circle", "green", 5);
+            ISweets chocolateCandy = factory.CreateChocolateCandy("Chocolate Candy", 5, 3, "rectangular", 4, 10);
+            ISweets milkCandy = factory.CreateMilkCandy("Korovka", 3, 2, "rectangular", 1, 7);
+            ISweets frutCandy = factory.CreateFrutCandy("Abricosovye Candy", 2.4, 1.2, "elliptical", "apricot", 6);
+            ISweets stickOfConfectioneryS = factory.CreateStickOfConfectionery("Snikers stickOfConfectionery", 35, 27,
+                15, 15);
+            ISweets stickOfConfectioneryM = factory.CreateStickOfConfectionery("Mars stickOfConfectionery", 25, 15, 20,
+                13);
+            ISweets wafer = factory.CreateWafer("Chernomorskie wafers", 6, 3, 2, 11);
+            NewYearsGift gift =new NewYearsGift();
+            gift.Add(new[] {lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
+                       frutCandy});
+            //gift.Add(new List<ISweets> {lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
+            //            frutCandy});
+            
+           
 
-            NewYearsGift gift =
-                new NewYearsGift(new List<ISweets>()){lollipop, chocolateCandy, stickOfConfectioneryM, stickOfConfectioneryS, wafer, milkCandy,
-                        frutCandy};
-          
             Package package = new Package("cellophane","green", gift);
             
             Console.WriteLine("*********************Total Weight Candies************");
@@ -37,6 +44,8 @@ namespace Task1
             Console.WriteLine("*********************Total Cost NewYearsGift*********");
             Console.WriteLine(gift.GiftCost);
             Console.WriteLine("*********************All Sweets**********************");
+           
+
             Console.WriteLine(gift.GetAllSweets().ListAllToString());
             Console.WriteLine("*********************Finded Candyes******************");
             Console.WriteLine(gift.FindCandies(1, 7).ListCandyToString());
