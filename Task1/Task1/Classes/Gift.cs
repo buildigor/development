@@ -24,8 +24,8 @@ namespace Task1.Classes
         public virtual IEnumerable<Candy> OrderCandyBy<TR>(Func<ISweets, TR> comparerFunc)
         { return new List<Candy>(); }
 
-        public virtual IEnumerable<ISweets> OrderSweetsBy<TR>(Func<ISweets, TR> comparerFunc)
-        { return new List<Candy>(); }
+        public virtual IEnumerable<ISweets> OrderAllSweetsBy<TR>(Func<ISweets, TR> comparerFunc)
+        { return new List<ISweets>(); }
 
 
         public virtual IEnumerator<ISweets> GetEnumerator()

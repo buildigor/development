@@ -93,7 +93,7 @@ namespace Task1.Classes
 
         }
 
-        public override IEnumerable<ISweets> OrderSweetsBy<TR>(Func<ISweets, TR> comparerFunc)
+        public override IEnumerable<ISweets> OrderAllSweetsBy<TR>(Func<ISweets, TR> comparerFunc)
         {
             return _sweets.OrderBy(comparerFunc).ToList();
         }

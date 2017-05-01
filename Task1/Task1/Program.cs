@@ -33,6 +33,7 @@ namespace Task1
                     frutCandy
                 }
             };
+            
             Package package = new Package("cellophane","green", gift);
             
             Console.WriteLine("*********************Total Weight Candies************");
@@ -54,7 +55,7 @@ namespace Task1
             Console.WriteLine("*********************Finded Sweets*******************");
             Console.WriteLine(gift.FindSweets(3,15).ListAllToString());
             Console.WriteLine("*********************Ordered Sweets By Name**********");
-            Console.WriteLine(gift.OrderSweetsBy(x=>x.Name).ListAllToString());
+            Console.WriteLine(gift.OrderAllSweetsBy(x=>x.Name).ListAllToString());
             Console.WriteLine(gift.GetType().Name + " in "+package.Material+" package " + package.Color);
 
             Console.ReadLine();
