@@ -8,7 +8,7 @@ using Task2.Enums;
 
 namespace Task2.Model
 {
-    class SentenceElement:ISentenceElement
+  public  class SentenceElement:ISentenceElement
     {
         public SentenceElement(string sentenceElementValue,SentenceElementTypes sentenceElementType)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task2.Contracts
 {
-   public interface ISentence:IEnumerable<ISentenceElement>
+   public interface ISentence
    {
        void Add(ISentenceElement element);
        int GetWordsCount();

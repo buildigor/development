@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Task2.Model;
@@ -17,7 +18,7 @@ namespace Task2.Businesslogic
             _filePath = filePath;
         }
 
-        public string Read()
+        public List<string> Read()
         {
             StringBuilder stringBuilder = new StringBuilder();
             using (StreamReader streamReader = new StreamReader(_filePath))
@@ -28,16 +29,19 @@ namespace Task2.Businesslogic
                 }
             }
             var text = stringBuilder.ToString();
-            text = text.TrimStart().TrimEnd().Replace(Environment.NewLine, " ");
+            text = text.Trim().Replace(Environment.NewLine, " ");
             while (text.IndexOf("  ", StringComparison.Ordinal) != -1)
             {
                 text = text.Replace("  ", " ");
             }
-
-           
-            return text;
+          return  SplitText(text);
         }
 
-       
+        private List<string> SplitText(string text)
+        {
+            string[] splittext = Regex.Split(text, "(?<=[\\.!?])");
+            List<string> sentenceList = splittext.Where(s => s != "" & s != ".").ToList();
+            return sentenceList;
+        }
     }
 }
