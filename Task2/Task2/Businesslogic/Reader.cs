@@ -12,16 +12,13 @@ namespace Task2.Businesslogic
     class Reader
     {
         private readonly string _filePath;
-        private readonly string _bufLine;
         public Reader(string filePath)
         {
             _filePath = filePath;
-            _bufLine = string.Empty;
         }
 
         public string Read()
         {
-            string s = null;
             StringBuilder stringBuilder = new StringBuilder();
             using (StreamReader streamReader = new StreamReader(_filePath))
             {
@@ -30,13 +27,15 @@ namespace Task2.Businesslogic
                  stringBuilder.AppendLine(streamReader.ReadLine());
                 }
             }
-            s = stringBuilder.ToString();
-            while (s.IndexOf("  ", StringComparison.Ordinal) != -1)
+            var text = stringBuilder.ToString();
+            text = text.TrimStart().TrimEnd().Replace(Environment.NewLine, " ");
+            while (text.IndexOf("  ", StringComparison.Ordinal) != -1)
             {
-                s = s.Replace("  ", " ");
+                text = text.Replace("  ", " ");
             }
-           s= s.TrimStart().TrimEnd();
-            return s;
+
+           
+            return text;
         }
 
        
