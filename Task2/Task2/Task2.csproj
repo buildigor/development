@@ -45,10 +45,11 @@
     <Compile Include="Businesslogic\Worker.cs" />
     <Compile Include="Contracts\ISentence.cs" />
     <Compile Include="Contracts\ISentenceElement.cs" />
+    <Compile Include="Contracts\IText.cs" />
     <Compile Include="Enums\SentenceElementTypes.cs" />
     <Compile Include="Model\Sentence.cs" />
     <Compile Include="Model\SentenceElement.cs" />
-    <Compile Include="Model\Text.cs" />
+    <Compile Include="Model\TrimmedText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

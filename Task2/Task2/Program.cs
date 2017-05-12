@@ -14,8 +14,8 @@ namespace Task2
         static void Main(string[] args)
         {
             Reader textReader = new Reader("text.txt");
-            List<string> Sentences = new List<string>();
-            Sentences = textReader.Read();
+            TrimmedText trimmedText = new TrimmedText(textReader.Read());
+
 
 
         }

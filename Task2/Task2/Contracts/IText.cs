@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Task2.Model;
 
-namespace Task2.Businesslogic
+namespace Task2.Contracts
 {
-  public  class Worker
+    interface IText
     {
-     
+        int GetCountSentences();
     }
 }

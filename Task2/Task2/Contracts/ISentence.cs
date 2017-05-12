@@ -8,7 +8,7 @@ namespace Task2.Contracts
 {
    public interface ISentence
    {
-       void Add(ISentenceElement element);
+       
        int GetWordsCount();
        int GetElementsCount();
        void DeleteWords(int wordLenght);

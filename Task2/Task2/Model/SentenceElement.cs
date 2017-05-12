@@ -10,14 +10,14 @@ namespace Task2.Model
 {
   public  class SentenceElement:ISentenceElement
     {
-        public SentenceElement(string sentenceElementValue,SentenceElementTypes sentenceElementType)
-        {
-            Value = sentenceElementValue;
-            SentenceElementType = sentenceElementType;
-        }
+      private readonly string[] _marks = new[] { ",", " - ", ":" ,"\"",".","!","?","?!"};
+      public SentenceElement(string sentenceElementValue)
+      {
+          Value = sentenceElementValue;
+      }
 
-        public string Value { get; set; }
-        public SentenceElementTypes SentenceElementType { get; private set; }
+      public string Value { get; set; }
+      public SentenceElementTypes SentenceElementType { get { return _marks.Contains(Value) ? SentenceElementTypes.PunctuationMark : SentenceElementTypes.Word; } }
        
     }
 }
