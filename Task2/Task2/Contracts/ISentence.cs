@@ -8,10 +8,10 @@ namespace Task2.Contracts
 {
    public interface ISentence
    {
-       
+       IEnumerable<ISentenceElement> SententenceElements { get;  }
+       ISentenceElement GetElementByIndex(int index);
        int GetWordsCount();
        int GetElementsCount();
-       void DeleteWords(int wordLenght);
-       void ReplaceWords(int wordLenght, string newValue);
+       string Value { get; set; }
    }
 }

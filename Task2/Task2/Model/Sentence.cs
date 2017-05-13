@@ -12,35 +12,35 @@ namespace Task2.Model
 {
   public  class Sentence:ISentence
     {
-      private readonly IEnumerable<ISentenceElement> _sententenceElements;
-
-      public Sentence(string sentence) 
+      public IEnumerable<ISentenceElement> SententenceElements { get; private set; }
+      public string Value { get; set; }
+      public Sentence(string sentence)
       {
-          _sententenceElements = new List<ISentenceElement>();
+          Value = sentence;
+          SententenceElements = new List<ISentenceElement>();
           string[] splitSentence = Regex.Split(sentence, "([' ',:\\-\\.])");
-          _sententenceElements = splitSentence.Where(s=>s!=" "&s!="").Select(z => new SentenceElement(z)).ToList();
+          SententenceElements = splitSentence.Where(s=>s!=" "&s!="").Select(z => new SentenceElement(z)).ToList();
+          
       }
 
-  
+
+      public ISentenceElement GetElementByIndex(int index)
+      {
+          return SententenceElements.ToList()[index];
+      }
 
       public int GetWordsCount()
       {
-          return _sententenceElements.Count(sentenceElement => sentenceElement.SentenceElementType == SentenceElementTypes.Word);
+          return SententenceElements.Count(sentenceElement => sentenceElement.SentenceElementType == SentenceElementTypes.Word);
       }
 
       public int GetElementsCount()
       {
-          return _sententenceElements.Count();
+          return SententenceElements.Count();
       }
 
-      public void DeleteWords(int wordLenght)
-      {
-          
-      }
+     
 
-      public void ReplaceWords(int wordLenght, string newValue)
-      {
-          
-      }
+      
     }
 }

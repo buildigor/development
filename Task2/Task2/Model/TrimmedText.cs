@@ -10,25 +10,31 @@ namespace Task2.Model
 {
   public  class TrimmedText:IText
     {
-      private readonly IEnumerable<ISentence> _sentences;
+      public IEnumerable<ISentence> Sentences { get; private set; }
 
       public TrimmedText(string text)
       {
-          _sentences = new List<ISentence>();
+          Sentences = new List<ISentence>();
           text = text.Trim().Replace(Environment.NewLine, " ");
           while (text.IndexOf("  ", StringComparison.Ordinal) != -1)
           {
               text = text.Replace("  ", " ");
           }
           string[] splittext = Regex.Split(text, "(?<=[\\.!?])");
-
-          _sentences = splittext.Where(s => s != "" & s != ".").Select(z => new Sentence(z)).ToList();
+          Sentences = splittext.Where(s => s != "" & s != ".").Select(z => new Sentence(z)).ToList();
       }
 
 
       public int GetCountSentences()
       {
-          return _sentences.Count();
+          return Sentences.Count();
+      }
+
+     
+      
+      public List<string> GetSentences()
+      {
+          return Sentences.Select(x => x.Value).ToList();
       }
     }
 }
