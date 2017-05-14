@@ -8,11 +8,11 @@ using Task2.Contracts;
 
 namespace Task2.Model
 {
-    public class TrimmedText : IText
+    public class PreparedText : IText
     {
         public IEnumerable<ISentence> Sentences { get; private set; }
 
-        public TrimmedText(string text)
+        public PreparedText(string text)
         {
             Sentences = new List<ISentence>();
             text = text.Trim().Replace(Environment.NewLine, " ");
@@ -20,7 +20,7 @@ namespace Task2.Model
             {
                 text = text.Replace("  ", " ");
             }
-            string[] splittext = Regex.Split(text, "(?<=[\\.!?])");
+            string[] splittext = Regex.Split(text, "(?<=\\. )|(?<=!)|(?<=\\?)|(?<=\\.\\.\\. )");
             Sentences = splittext.Where(s => s != "" & s != ".").Select(z => new Sentence(z)).ToList();
         }
 

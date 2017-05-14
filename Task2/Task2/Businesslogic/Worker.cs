@@ -12,27 +12,28 @@ namespace Task2.Businesslogic
 {
     public class Worker
     {
-        private readonly TrimmedText _trimmedText;
+        private readonly PreparedText _preparedText;
 
-        public Worker(TrimmedText trimmedText)
+        public Worker(PreparedText preparedText)
         {
-            _trimmedText = trimmedText;
+            _preparedText = preparedText;
         }
 
         public List<string> SortSentencesInAscendingOrderOfTheNumberOfWords()
         {
-            return _trimmedText.Sentences.OrderBy(x => x.GetWordsCount()).Select(s => s.Value).ToList();
+            return _preparedText.Sentences.OrderBy(x => x.GetWordsCount()).Select(s => s.Value).ToList();
         }
 
         public List<string> GetQuestionSentences()
         {
-            return _trimmedText.Sentences.Where(x => x.Value.Contains('?')).Select(s => s.Value).ToList();
+            return _preparedText.Sentences.Where(x => x.Value.Contains('?')).Select(s => s.Value).ToList();
         }
 
-        public List<string> FindWordsByLenght(int wordLenght)
+        public IEnumerable<string> FindWordsByLenght(int wordLenght)
         {
             List<string> words = new List<string>();
-            foreach (ISentence currentsentence in _trimmedText.Sentences.Where(x => x.Value.Contains('?')))
+            
+            foreach (ISentence currentsentence in _preparedText.Sentences.Where(x => x.Value.Contains('?')))
             {
                 for (int i = 0; i < currentsentence.GetWordsCount(); i++)
                 {
@@ -44,7 +45,8 @@ namespace Task2.Businesslogic
                     }
                 }
             }
-            return words;
+            IEnumerable<string> wordsDistinctList = words.Distinct();
+            return wordsDistinctList;
 
         }
 
@@ -53,9 +55,9 @@ namespace Task2.Businesslogic
             var excludes = new HashSet<string> { ",", "." };
             string pattern = @"[aeiou]";
             List<string> edittedSentenceElementList = new List<string>();
-            for (int i = 0; i <  _trimmedText.Sentences.Count();i++)
+            for (int i = 0; i <  _preparedText.Sentences.Count();i++)
             {
-                var sentence = _trimmedText.Sentences.ToList()[i];
+                var sentence = _preparedText.Sentences.ToList()[i];
                 for (int k = 0; k < sentence.GetElementsCount(); k++)
                 {
                     var currentElement = sentence.GetElementByIndex(k);
@@ -86,7 +88,7 @@ namespace Task2.Businesslogic
 
         public void ReplaceWords(int sentenceIndex, int wordLenght, string newValue)
         {
-            var currentsentence = _trimmedText.GetSentenceByIndex(sentenceIndex);
+            var currentsentence = _preparedText.GetSentenceByIndex(sentenceIndex);
             List<string> edittedSentenceElementList = new List<string>();
             for (int i = 0; i < currentsentence.GetWordsCount(); i++)
             {
