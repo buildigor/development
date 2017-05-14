@@ -34,6 +34,11 @@ namespace Task2.Model
           return SententenceElements.Count(sentenceElement => sentenceElement.SentenceElementType == SentenceElementTypes.Word);
       }
 
+      public override string ToString()
+      {
+          return Value;
+      }
+
       public int GetElementsCount()
       {
           return SententenceElements.Count();

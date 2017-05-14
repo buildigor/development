@@ -13,5 +13,6 @@ namespace Task2.Contracts
        int GetWordsCount();
        int GetElementsCount();
        string Value { get; set; }
+
    }
 }

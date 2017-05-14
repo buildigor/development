@@ -9,5 +9,6 @@ namespace Task2.Contracts
     interface IText
     {
         int GetCountSentences();
+        List<string> GetSentences();
     }
 }

@@ -26,11 +26,7 @@ namespace Task2
         {
             Reader textReader = new Reader("text.txt");
             TrimmedText trimmedText = new TrimmedText(textReader.Read());
-            List<string> seList = new List<string>(trimmedText.GetSentences());
-            foreach (var s in seList)
-            {
-                Console.WriteLine(s);
-            }
+            Console.WriteLine(trimmedText.ToString());
             Worker worker = new Worker(trimmedText);
             foreach (var a in worker.SortSentencesInAscendingOrderOfTheNumberOfWords())
             {
@@ -40,12 +36,13 @@ namespace Task2
             {
                 Console.WriteLine(a);
             }
-            foreach (string s in worker.FindWordsByLenght(4))
+            foreach (string s in worker.FindWordsByLenght(2))
             {
                 Console.WriteLine(s);
             }
-            
-            
+            worker.DeleteWords(1);
+            worker.ReplaceWords(1, 2, "qwertttttttttttttttttt");
+            Console.WriteLine(trimmedText.ToString());
             Console.ReadLine();
         }
     }
