@@ -50,7 +50,7 @@ namespace Task2.Businesslogic
 
         }
 
-        public void DeleteWords(int wordLenght)
+        public void DeleteWordsWithFirstConsonant(int wordLenght)
         {
             var excludes = new HashSet<string> { ",", "." };
             string pattern = @"[aeiou]";

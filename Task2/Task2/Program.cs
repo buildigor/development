@@ -47,9 +47,9 @@ namespace Task2
                 Console.WriteLine(s);
             }
             //Из текста удалить все слова заданной длины, начинающиеся на согласную букву.
-            worker.DeleteWords(1);
+            worker.DeleteWordsWithFirstConsonant(1);
             //В некотором предложении текста слова заданной длины заменить указанной подстрокой, длина которой может не совпадать с длиной слова.
-            worker.ReplaceWords(1, 2, "qwertttttttttttttttttt");
+            worker.ReplaceWords(1, 5, "qwertttttttttttttttttt");
             Console.WriteLine(delimiter);
             //Результат обработки
             Console.WriteLine(preparedText.ToString());
