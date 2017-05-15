@@ -13,7 +13,8 @@ namespace Task2_1
             Reader reader = new Reader("text.txt");
             Concordance concordance = new Concordance();
             concordance.AddWordsToDictionary(reader.Read());
-            concordance.ShowConcordance();
+            Console.WriteLine(concordance.ShowConcordance());
+            Result.SaveToFile("rezult.txt",concordance.ShowConcordance());
             Console.ReadLine();
         }
     }

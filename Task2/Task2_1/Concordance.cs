@@ -46,23 +46,25 @@ namespace Task2_1
            }
        }
 
-       public void ShowConcordance()
+       public string ShowConcordance()
        {
+           string concordance = null;
            List<WordInfo> sortedWords = _concordanceDictionary.Values.OrderBy(x => x.Word).ToList();
            string prevUpperLetter = "";
            foreach (var grupped in sortedWords)
            {
-               Console.WriteLine(Environment.NewLine);
+               concordance += Environment.NewLine;
                string nextUpperLetter = grupped.Word.Substring(0, 1).ToUpper();
-               if(nextUpperLetter!=prevUpperLetter)
-               Console.WriteLine("[{0}]", nextUpperLetter);
-               prevUpperLetter = grupped.Word.Substring(0, 1).ToUpper();
-               Console.Write(grupped.Word+" "+grupped.WordCount+": ");
-               foreach (int number in grupped.LineNumbers)
+               if (nextUpperLetter != prevUpperLetter)
                {
-                   Console.Write("{0} ",number);
+                   concordance += Environment.NewLine;
+                   concordance += "[" + nextUpperLetter + "]" + Environment.NewLine;
                }
+               prevUpperLetter = grupped.Word.Substring(0, 1).ToUpper();
+               concordance += grupped.Word + " " + grupped.WordCount + ": ";
+               concordance = grupped.LineNumbers.Aggregate(concordance, (current, number) => current + (" " + number));
            }
+           return concordance;
        }
     }
 }
