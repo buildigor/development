@@ -22,7 +22,9 @@ namespace Task2.Businesslogic
         public string Read()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            using (StreamReader streamReader = new StreamReader(_filePath,Encoding.Default))
+            try
+            {
+       using (StreamReader streamReader = new StreamReader(_filePath,Encoding.Default))
             {
                 while (!streamReader.EndOfStream)
                 {
@@ -30,8 +32,16 @@ namespace Task2.Businesslogic
                 }
             }
             var text = stringBuilder.ToString();
+                return text;
+            }
+            catch (Exception e)
+            {
 
-            return text;
+                return e.ToString();
+            }
+     
+
+            
         }
 
     }
