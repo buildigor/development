@@ -53,7 +53,7 @@ namespace Task2.Businesslogic
         public void DeleteWordsWithFirstConsonant(int wordLenght)
         {
             var excludes = new HashSet<string> { ",", "." };
-            string pattern = @"[aeiou]";
+            string pattern = @"[aeiou]|[AEIOU]|[аоуэыяёюеи]|[АОУЭЫЯЁЮЕИ]";
             List<string> edittedSentenceElementList = new List<string>();
             for (int i = 0; i <  _preparedText.Sentences.Count();i++)
             {
@@ -67,8 +67,10 @@ namespace Task2.Businesslogic
                     {
                         currentElement.Value = "";
                     }
+                    if (currentElement.Value!="")
                     edittedSentenceElementList.Add(currentElement.Value);
                 }
+                sentence.Value = "";
                 foreach (var s in edittedSentenceElementList)
                 {
                     sentence.Value += excludes.Contains(s) ? s : string.Concat(" ", s);

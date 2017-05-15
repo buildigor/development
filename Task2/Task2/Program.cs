@@ -42,14 +42,14 @@ namespace Task2
             }
             //Во всех вопросительных предложениях текста найти и напечатать без повторений слова заданной длины.
             Console.WriteLine(delimiter);
-            foreach (string s in worker.FindWordsByLenght(2))
+            foreach (string s in worker.FindWordsByLenght(4))
             {
                 Console.WriteLine(s);
             }
             //Из текста удалить все слова заданной длины, начинающиеся на согласную букву.
-            worker.DeleteWordsWithFirstConsonant(1);
+            worker.DeleteWordsWithFirstConsonant(5);
             //В некотором предложении текста слова заданной длины заменить указанной подстрокой, длина которой может не совпадать с длиной слова.
-            worker.ReplaceWords(1, 5, "qwertttttttttttttttttt");
+            worker.ReplaceWords(1, 6, "qwertttttttttttttttttt");
             Console.WriteLine(delimiter);
             //Результат обработки
             Console.WriteLine(preparedText.ToString());

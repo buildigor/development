@@ -22,7 +22,7 @@ namespace Task2.Businesslogic
         public string Read()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            using (StreamReader streamReader = new StreamReader(_filePath))
+            using (StreamReader streamReader = new StreamReader(_filePath,Encoding.Default))
             {
                 while (!streamReader.EndOfStream)
                 {
