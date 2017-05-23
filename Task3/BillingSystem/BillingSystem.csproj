@@ -40,12 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\CallType.cs" />
+    <Compile Include="Enums\TypeSortCalls.cs" />
     <Compile Include="ReportCallInfo.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Contracts\IContract.cs" />
     <Compile Include="Contracts\ITariff.cs" />
     <Compile Include="Enums\TariffType.cs" />
     <Compile Include="Report.cs" />
+    <Compile Include="ReportProvider.cs" />
     <Compile Include="Subscriber.cs" />
     <Compile Include="Tariff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

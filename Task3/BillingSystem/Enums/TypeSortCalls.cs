@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace BillingSystem.Enums
 {
-  public  enum TariffType
+    public enum TypeSortCalls
     {
-      Mini,
-      Light,
-      Ultra
+        SortByCallType,
+        SortByDate,
+        SortByCost,
+        SortByNumber
     }
 }
