@@ -8,5 +8,6 @@ namespace ATS
 {
     public class AutomaticTelephoneExchange
     {
+        private IList<CallInfo> _callList;
     }
 }

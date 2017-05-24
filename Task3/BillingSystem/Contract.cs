@@ -15,6 +15,7 @@ namespace BillingSystem
        public Subscriber Subscriber { get; private set; }
        public Tariff Tariff { get; private set; }
        public DateTime LastDateUpdateTariff;
+       public double Ballance { get; private set; }
 
        public Contract(Subscriber subscriber, TariffType tariffType)
        {
@@ -22,6 +23,7 @@ namespace BillingSystem
            Subscriber = subscriber;
            Tariff = new Tariff(tariffType);
            LastDateUpdateTariff = DateTime.Now;
+           Ballance = 13;
        }
        public bool ChangeTariff(TariffType tariffType)
        {
@@ -36,6 +38,14 @@ namespace BillingSystem
            return false;
        }
 
+       public void ReplenishmentOfBalance(double money)
+       {
+           Ballance += money;
+       }
+       public void Debit(double money)
+       {
+           Ballance -= money;
+       }
        
     }
 }
