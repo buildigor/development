@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Billing.cs" />
     <Compile Include="Enums\CallType.cs" />
     <Compile Include="Enums\TypeSortCalls.cs" />
     <Compile Include="ReportCallInfo.cs" />

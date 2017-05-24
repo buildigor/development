@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BillingSystem.Enums;
 
 namespace BillingSystem.Contracts
 {
@@ -11,6 +12,6 @@ namespace BillingSystem.Contracts
       int Number { get; }
       Subscriber Subscriber { get; }
       Tariff Tariff { get; }
-      bool ChangeTariff();
+      bool ChangeTariff(TariffType tariffType);
     }
 }

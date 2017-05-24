@@ -41,11 +41,12 @@
   <ItemGroup>
     <Compile Include="AutomaticTelephoneExchange.cs" />
     <Compile Include="CallInfo.cs" />
+    <Compile Include="Contracts\IInfo.cs" />
+    <Compile Include="Enums\CallState.cs" />
+    <Compile Include="Enums\PortState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

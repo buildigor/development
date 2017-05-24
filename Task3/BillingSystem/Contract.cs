@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BillingSystem.Contracts;
+using BillingSystem.Enums;
 
 namespace BillingSystem
 {
@@ -13,9 +14,20 @@ namespace BillingSystem
        public Subscriber Subscriber { get; private set; }
        public Tariff Tariff { get; private set; }
        public DateTime LastDateUpdateTariff;
-       public bool ChangeTariff()
+       public bool ChangeTariff(TariffType tariffType)
        {
-           throw new NotImplementedException();
+           if (DateTime.Now.AddMonths(-1)>=LastDateUpdateTariff)
+           {
+               LastDateUpdateTariff = DateTime.Now;
+               Tariff = new Tariff(tariffType);
+               Console.WriteLine("Tariff has changed!");
+               return true;
+           }
+           else
+           {
+               Console.WriteLine("The tariff can be changed not more often than once a month!");
+               return false;
+           }
        }
 
        
