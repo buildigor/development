@@ -16,5 +16,8 @@ namespace ATS
           Number = number;
           _port = port;
       }
+      public event EventHandler CallEvent;
+      public event EventHandler AnswerEvent;
+      public event EventHandler EndCallEvent;
     }
 }

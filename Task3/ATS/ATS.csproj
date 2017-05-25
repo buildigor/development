@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AutomaticTelephoneExchange.cs" />
     <Compile Include="CallInfo.cs" />
+    <Compile Include="Contracts\ICallEventArgs.cs" />
     <Compile Include="Contracts\IInfo.cs" />
     <Compile Include="Enums\CallState.cs" />
     <Compile Include="Enums\PortState.cs" />
