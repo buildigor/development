@@ -45,6 +45,9 @@
     <Compile Include="Contracts\IInfo.cs" />
     <Compile Include="Enums\CallState.cs" />
     <Compile Include="Enums\PortState.cs" />
+    <Compile Include="ExtensionLibArgs\AnswerEventArgs.cs" />
+    <Compile Include="ExtensionLibArgs\CallEventArgs.cs" />
+    <Compile Include="ExtensionLibArgs\EndCallEventArgs.cs" />
     <Compile Include="Port.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terminal.cs" />

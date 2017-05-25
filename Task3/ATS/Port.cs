@@ -4,70 +4,91 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATS.Enums;
+using ATS.ExtensionLibArgs;
 
 namespace ATS
 {
-  public  class Port
-  {
-      public PortState PortState;
+    public class Port
+    {
+        public PortState PortState;
 
-      public Port()
-      {
-          PortState=PortState.Disconnect;
-      }
+        public Port()
+        {
+            PortState = PortState.Disconnect;
+        }
 
-      public event EventHandler CallEvent;
-      public event EventHandler AnswerEvent;
-      public event EventHandler EndCallEvent;
+        public event EventHandler<CallEventArgs> CallEvent;
+        public event EventHandler<AnswerEventArgs> AnswerEvent;
+        public event EventHandler<EndCallEventArgs> EndCallEvent;
 
-      public bool ConnectToPort(Terminal terminal)
-      {
-          if (PortState==PortState.Disconnect)
-          {
-              PortState=PortState.Connect;
-              terminal.AnswerEvent += terminal_AnswerEvent;
-              terminal.CallEvent += terminal_CallEvent;
-              terminal.EndCallEvent += terminal_EndCallEvent;
-          }
-          return true;
-      }
-      public bool DisconnectFromPort(Terminal terminal)
-      {
-          if (PortState == PortState.Connect)
-          {
-              PortState = PortState.Disconnect;
-              terminal.AnswerEvent -= terminal_AnswerEvent;
-              terminal.CallEvent -= terminal_CallEvent;
-              terminal.EndCallEvent -= terminal_EndCallEvent;
-          }
-          return false;
-      }
-      public bool InCallPort(Terminal terminal)
-      {
-          if (PortState != PortState.InCall)
-          {
-              PortState = PortState.InCall;
-              terminal.AnswerEvent -= terminal_AnswerEvent;
-              terminal.CallEvent -= terminal_CallEvent;
-              terminal.EndCallEvent -= terminal_EndCallEvent;
-          }
-          return false;
-      }
+        public bool ConnectToPort(Terminal terminal)
+        {
+            if (PortState == PortState.Disconnect)
+            {
+                PortState = PortState.Connect;
+                terminal.AnswerEvent += terminal_AnswerEvent;
+                terminal.CallEvent += terminal_CallEvent;
+                terminal.EndCallEvent += terminal_EndCallEvent;
+            }
+            return true;
+        }
 
-      void terminal_EndCallEvent(object sender, EventArgs e)
-      {
-          throw new NotImplementedException();
-      }
+        public bool DisconnectFromPort(Terminal terminal)
+        {
+            if (PortState == PortState.Connect)
+            {
+                PortState = PortState.Disconnect;
+                terminal.AnswerEvent -= terminal_AnswerEvent;
+                terminal.CallEvent -= terminal_CallEvent;
+                terminal.EndCallEvent -= terminal_EndCallEvent;
+            }
+            return false;
+        }
 
-      void terminal_CallEvent(object sender, EventArgs e)
-      {
-          throw new NotImplementedException();
-      }
+        public bool InCallPort(Terminal terminal)
+        {
+            if (PortState != PortState.InCall)
+            {
+                PortState = PortState.InCall;
+                terminal.AnswerEvent -= terminal_AnswerEvent;
+                terminal.CallEvent -= terminal_CallEvent;
+                terminal.EndCallEvent -= terminal_EndCallEvent;
+            }
+            return false;
+        }
 
-      void terminal_AnswerEvent(object sender, EventArgs e)
-      {
-          throw new NotImplementedException();
-      }
-     
-  }
+        void terminal_EndCallEvent(object sender, EndCallEventArgs e)
+        {
+            OnEndCallEvent(e.PhoneNumber);
+        }
+
+        void terminal_CallEvent(object sender, CallEventArgs e)
+        {
+            OnCallEvent(e.PhoneNumber, e.TargetPhoneNumber);
+        }
+
+        void terminal_AnswerEvent(object sender, AnswerEventArgs e)
+        {
+            OnAnswerEvent(e.PhoneNumber, e.TargetPhoneNumber, e.CallState);
+        }
+
+        protected virtual void OnCallEvent(int number, int targetNumber)
+        {
+            var handler = CallEvent;
+            if (handler != null) handler(this, new CallEventArgs(number, targetNumber));
+        }
+
+        protected virtual void OnAnswerEvent(int number, int targetNumber, CallState callState)
+        {
+            var handler = AnswerEvent;
+            if (handler != null) handler(this, new AnswerEventArgs(number, targetNumber, callState));
+        }
+
+        protected virtual void OnEndCallEvent(int number)
+        {
+            var handler = EndCallEvent;
+            if (handler != null) handler(this, new EndCallEventArgs(number));
+        }
+
+    }
 }
