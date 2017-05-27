@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BillingSystem.Contracts;
-using BillingSystem.Enums;
+using ATS.Contracts;
+using ATS.Enums;
 
-namespace BillingSystem
+namespace ATS.Subscriber
 {
    public class Contract:IContract
     {
@@ -37,7 +37,6 @@ namespace BillingSystem
            Console.WriteLine("The tariff can be changed not more often than once a month!");
            return false;
        }
-
        public void ReplenishmentOfBalance(double money)
        {
            Ballance += money;

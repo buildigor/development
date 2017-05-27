@@ -43,21 +43,18 @@
     <Compile Include="Enums\CallType.cs" />
     <Compile Include="Enums\TypeSortCalls.cs" />
     <Compile Include="ReportCallInfo.cs" />
-    <Compile Include="Contract.cs" />
-    <Compile Include="Contracts\IContract.cs" />
-    <Compile Include="Contracts\ITariff.cs" />
-    <Compile Include="Enums\TariffType.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="ReportProvider.cs" />
-    <Compile Include="Subscriber.cs" />
-    <Compile Include="Tariff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATS\ATS.csproj">
-      <Project>{10519F21-CFB2-4F96-A6D0-4C74C59CC3A7}</Project>
+      <Project>{10519f21-cfb2-4f96-a6d0-4c74c59cc3a7}</Project>
       <Name>ATS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BillingSystem.Enums;
+using ATS.Enums;
+using ATS.Subscriber;
 
-namespace BillingSystem.Contracts
+namespace ATS.Contracts
 {
   public  interface IContract
     {
       int Number { get; }
-      Subscriber Subscriber { get; }
+      Subscriber.Subscriber Subscriber { get; }
       Tariff Tariff { get; }
       bool ChangeTariff(TariffType tariffType);
     }

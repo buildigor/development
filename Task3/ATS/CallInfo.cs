@@ -12,7 +12,7 @@ namespace ATS
        public int TargetNumber { get; set; }
        public DateTime BeginCall { get; set; }
        public DateTime EndCall { get; set; }
-       public double Cost { get; set; }
+      // public double Cost { get; set; }
 
        public CallInfo(int number, int targetNumber, DateTime beginCall)
        {

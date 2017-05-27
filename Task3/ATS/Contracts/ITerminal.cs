@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ATS.Contracts
 {
-   public interface ICallEventArgs
+    public interface ITerminal
     {
-        int PhoneNumber { get; }
-        int TargetPhoneNumber { get; }
+        int Number { get; }
+        void Call(int targetNumber);
+        void ConnectToPort();
+        void EndCall();
     }
 }

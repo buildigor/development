@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATS.Contracts
+namespace ATS.Enums
 {
-   public interface ICallEventArgs
+  public  enum TariffType
     {
-        int PhoneNumber { get; }
-        int TargetPhoneNumber { get; }
+      Mini,
+      Light,
+      Ultra
     }
 }

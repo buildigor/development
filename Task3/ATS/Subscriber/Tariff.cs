@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BillingSystem.Contracts;
-using BillingSystem.Enums;
+using ATS.Contracts;
+using ATS.Enums;
 
-namespace BillingSystem
+namespace ATS.Subscriber
 {
     public class Tariff:ITariff
     {

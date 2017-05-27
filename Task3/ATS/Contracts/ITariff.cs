@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BillingSystem.Enums
+namespace ATS.Contracts
 {
-  public  enum TariffType
+  public  interface ITariff
     {
-      Mini,
-      Light,
-      Ultra
+      double CostOfMonth { get; }
+      double CostCallPerMinute { get; }
     }
 }

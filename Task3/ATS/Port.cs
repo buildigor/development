@@ -20,6 +20,8 @@ namespace ATS
         public event EventHandler<CallEventArgs> CallEvent;
         public event EventHandler<AnswerEventArgs> AnswerEvent;
         public event EventHandler<EndCallEventArgs> EndCallEvent;
+        public event EventHandler<CallEventArgs> CallPortEvent;
+        public event EventHandler<AnswerEventArgs> AnswerPortEvent;
 
         public bool ConnectToPort(Terminal terminal)
         {
@@ -90,5 +92,20 @@ namespace ATS
             if (handler != null) handler(this, new EndCallEventArgs(number));
         }
 
+        protected virtual void OnCallPortEvent(int number, int targetNumber)
+        {
+            var handler = CallPortEvent;
+            if (handler != null) handler(this, new CallEventArgs(number, targetNumber));
+        }
+
+        protected virtual void OnAnswerPortEvent(int number, int targetNumber, CallState callState)
+        {
+            var handler = AnswerPortEvent;
+            if (handler != null) handler(this, new AnswerEventArgs(number, targetNumber, callState));
+        }
+        public void IncomingCall(int number, int targetNumber)
+        {
+            OnCallPortEvent(number, targetNumber);
+        }
     }
 }

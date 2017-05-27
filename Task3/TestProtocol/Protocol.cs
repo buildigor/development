@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BillingSystem.Contracts
+namespace TestProtocol
 {
-  public  interface ITariff
+    public class Class1
     {
-      double CostOfMonth { get; }
-      double CostCallPerMinute { get; }
     }
 }
