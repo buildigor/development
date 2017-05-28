@@ -29,10 +29,10 @@ namespace ATS
           if (handler != null) handler(this, new CallEventArgs(Number, targetNumber));
       }
 
-      protected virtual void OnAnswerEvent(int targetNumber, CallState state)
+      protected virtual void OnAnswerEvent( int number,int targetNumber, CallState state)
       {
           var handler = AnswerEvent;
-          if (handler != null) handler(this,new AnswerEventArgs(Number,targetNumber,state));
+          if (handler != null) handler(this,new AnswerEventArgs(number,targetNumber,state));
       }
 
       protected virtual void OnEndCallEvent()
@@ -46,8 +46,18 @@ namespace ATS
           if (_port.ConnectToPort(this))
           {
               _port.CallPortEvent += IncomingCall;
+              _port.AnswerPortEvent += _port_AnswerPortEvent;
           }
           
+      }
+
+      void _port_AnswerPortEvent(object sender, AnswerEventArgs e)
+      {
+          if (e.CallState==CallState.Answered)
+          {
+              Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", e.TargetPhoneNumber, e.PhoneNumber);
+          }
+          Console.WriteLine("Terminal with number: {0}, have rejected call", e.PhoneNumber);
       }
 
       public void Call(int targetNumber)
@@ -55,9 +65,9 @@ namespace ATS
           OnCallEvent(targetNumber);
       }
 
-      public void AnswerToCall(int targetNumber, CallState state)
+      public void AnswerToCall(int number,int targetNumber, CallState state)
       {
-          OnAnswerEvent(targetNumber,state);
+          OnAnswerEvent(number,targetNumber,state);
       }
 
       public void EndCall()
@@ -76,7 +86,7 @@ namespace ATS
               if (f=='Y'||f=='y')
               {
                   k = false;
-                  AnswerToCall(callEventArgs.PhoneNumber,CallState.Answered);
+                  AnswerToCall(callEventArgs.PhoneNumber, callEventArgs.TargetPhoneNumber,CallState.Answered);
               }
               else if (f == 'N' || f == 'n')
               {

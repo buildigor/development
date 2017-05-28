@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATS.Contracts;
+using ATS.Enums;
 using ATS.ExtensionLibArgs;
+using ATS.Subscriber;
 
 namespace ATS
 {
-    public class AutomaticTelephoneExchange
+    public class AutomaticTelephoneExchange : IAte
     {
         private readonly IList<CallInfo> _callInfoList;
         private readonly IDictionary<int, Tuple<Port, IContract>> _usersData;
@@ -27,17 +29,36 @@ namespace ATS
             port.CallEvent += port_CallEvent;
             port.EndCallEvent += port_EndCallEvent;
             _usersData.Add(terminal.Number, new Tuple<Port, IContract>(port, terminal));
-            return new Terminal(terminal.Number,port);
+            return new Terminal(terminal.Number, port);
+        }
+
+        public IContract RegisterContract(Subscriber.Subscriber subscriber, TariffType type)
+        {
+           Contract contract = new Contract(subscriber,type);
+            return contract;
         }
 
         void port_AnswerEvent(object sender, ICallEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e is AnswerEventArgs)
+            {
+                var answerArgs = (AnswerEventArgs) e;
+                _usersData[e.TargetPhoneNumber].Item1.AnswerCall(answerArgs.PhoneNumber, answerArgs.TargetPhoneNumber,
+                    answerArgs.CallState);
+            }
         }
 
         void port_EndCallEvent(object sender, ICallEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e is EndCallEventArgs)
+            {
+                var args = (EndCallEventArgs) e;
+                CallInfo info = _callInfoList.First(x => x.Number.Equals(args.PhoneNumber));
+                info.EndCall = DateTime.Now;
+                info.Cost = _usersData[e.PhoneNumber].Item2.Tariff.CostCallPerMinute*
+                                 (info.EndCall.Minute - info.BeginCall.Minute);
+                _usersData[e.PhoneNumber].Item2.Debit(info.Cost);
+            }
         }
 
         void port_CallEvent(object sender, ICallEventArgs e)
@@ -46,15 +67,23 @@ namespace ATS
             {
                 if (e is CallEventArgs)
                 {
-                    _callInfoList.Add(new CallInfo(e.PhoneNumber,e.TargetPhoneNumber,DateTime.Now));
-                    var port = _usersData[e.PhoneNumber].Item1;
-                    port.IncomingCall(e.PhoneNumber,e.TargetPhoneNumber);
+                    if (_usersData[e.PhoneNumber].Item2.Ballance >=
+                        _usersData[e.PhoneNumber].Item2.Tariff.CostCallPerMinute)
+                    {
+                        _callInfoList.Add(new CallInfo(e.PhoneNumber, e.TargetPhoneNumber, DateTime.Now));
+                        var port = _usersData[e.PhoneNumber].Item1;
+                        port.IncomingCall(e.PhoneNumber, e.TargetPhoneNumber);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Terminal with number {0} is not enough money in the account!", e.PhoneNumber);
+                    }
 
                 }
             }
         }
 
-        public IList<CallInfo> GetCallsInfo()
+        public IList<CallInfo> GetInfoList()
         {
             return _callInfoList;
         }

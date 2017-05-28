@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AutomaticTelephoneExchange.cs" />
     <Compile Include="CallInfo.cs" />
+    <Compile Include="Contracts\IAte.cs" />
     <Compile Include="Contracts\ICallEventArgs.cs" />
     <Compile Include="Contracts\IContract.cs" />
     <Compile Include="Contracts\IInfo.cs" />

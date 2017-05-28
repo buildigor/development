@@ -13,12 +13,9 @@ namespace BillingSystem
    public class Billing
    {
        private readonly IInfo<CallInfo> _info;
-       private readonly Contract _contract;
-
-       public Billing(IInfo<CallInfo> info, Contract contract)
+       public Billing(IInfo<CallInfo> info)
        {
            _info = info;
-           _contract = contract;
        }
 
        public Report GetReport(int telNumber)
@@ -39,9 +36,7 @@ namespace BillingSystem
                    callType=CallType.IncomingCall;
                    number = callInfo.Number;
                }
-               var minutesOfCall = callInfo.EndCall.Minute - callInfo.BeginCall.Minute;
-               var cost = minutesOfCall*_contract.Tariff.CostCallPerMinute;
-               report.AddCallInfo(new ReportCallInfo(callType,number,callInfo.BeginCall,new DateTime((callInfo.EndCall-callInfo.BeginCall).Ticks),cost));
+               report.AddCallInfo(new ReportCallInfo(callType,number,callInfo.BeginCall,new DateTime((callInfo.EndCall-callInfo.BeginCall).Ticks),callInfo.Cost));
            }
            return report;
        }

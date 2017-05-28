@@ -107,5 +107,9 @@ namespace ATS
         {
             OnCallPortEvent(number, targetNumber);
         }
+        public void AnswerCall(int number, int targetNumber, CallState state)
+        {
+            OnAnswerPortEvent(number, targetNumber, state);
+        }
     }
 }

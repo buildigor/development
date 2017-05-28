@@ -13,6 +13,9 @@ namespace ATS.Contracts
       int Number { get; }
       Subscriber.Subscriber Subscriber { get; }
       Tariff Tariff { get; }
+      double Ballance { get; }
       bool ChangeTariff(TariffType tariffType);
+      void ReplenishmentOfBalance(double money);
+      void Debit(double money);
     }
 }
