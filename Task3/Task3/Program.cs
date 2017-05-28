@@ -29,6 +29,8 @@ namespace Task3
             t1.ConnectToPort();
             t2.ConnectToPort();
             t3.ConnectToPort();
+            //t1.Call(t1.Number);
+            //Thread.Sleep(5000);
             t1.Call(t2.Number);
             Thread.Sleep(5000);
             t1.EndCall();
@@ -44,7 +46,12 @@ namespace Task3
                 var item in reportProvider.SortCallsByType(billing.GetReport(t1.Number), TypeSortCalls.SortByCallType))
             {
                 Console.WriteLine(
-                    "Report for {5}\n Type {0} |\n Date: {1} |\n Duration: {2} | Cost: {3} | Target Telephone number: {4}",
+                    "Report for number: {5}"
+                    + Environment.NewLine + " Type: {0} |"
+                    + Environment.NewLine + " Date: {1} |"
+                    + Environment.NewLine + " Duration: {2} |"
+                    + Environment.NewLine + " Cost: {3} |" 
+                    + Environment.NewLine + " Target Telephone number: {4}",
                     item.CallType, item.Date, item.Time.ToString("mm:ss"), item.Cost, item.TargetNumber, item.Number);
             }
             Console.ReadLine();

@@ -60,9 +60,9 @@ namespace ATS
                 var args = (EndCallEventArgs) e;
                 CallInfo info = _callInfoList.First(x => x.Number.Equals(args.PhoneNumber));
                 info.EndCall = DateTime.Now;
-                info.Cost = _usersData[e.PhoneNumber].Item2.Tariff.CostCallPerMinute*
+                info.Cost = _usersData[info.Number].Item2.Tariff.CostCallPerMinute*
                                  (info.EndCall.Minute - info.BeginCall.Minute);
-                _usersData[e.PhoneNumber].Item2.Debit(info.Cost);
+                _usersData[info.Number].Item2.Debit(info.Cost);
             }
         }
 

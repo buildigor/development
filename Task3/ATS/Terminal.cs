@@ -55,7 +55,7 @@ namespace ATS
       {
           if (e.CallState==CallState.Answered)
           {
-              Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", e.TargetPhoneNumber, e.PhoneNumber);
+              Console.WriteLine("Terminal with number: {0}, have answer on call from number: {1}", e.TargetPhoneNumber, e.PhoneNumber);
           }
           else
           {
@@ -82,7 +82,7 @@ namespace ATS
       public void IncomingCall(object sender, CallEventArgs callEventArgs)
       {
           bool k = true;
-          Console.WriteLine("Call from number: {0} to number: {1}",callEventArgs.PhoneNumber,callEventArgs.TargetPhoneNumber);
+          Console.WriteLine("Incoming call from number: {0} to number: {1}",callEventArgs.PhoneNumber,callEventArgs.TargetPhoneNumber);
           while (k)
           {
               Console.WriteLine("Answer? Y/N");
@@ -90,7 +90,11 @@ namespace ATS
               if (f=='Y'||f=='y')
               {
                   k = false;
-                  AnswerToCall(callEventArgs.PhoneNumber, callEventArgs.TargetPhoneNumber,CallState.Answered);
+                  Console.WriteLine();
+                  if (callEventArgs.PhoneNumber != callEventArgs.TargetPhoneNumber) 
+                  { AnswerToCall(callEventArgs.PhoneNumber, callEventArgs.TargetPhoneNumber,CallState.Answered);}
+                  else {Console.WriteLine("You can not call yourself"); }
+                  
               }
               else if (f == 'N' || f == 'n')
               {
