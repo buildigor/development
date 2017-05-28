@@ -36,7 +36,7 @@ namespace BillingSystem
                    callType=CallType.IncomingCall;
                    number = callInfo.Number;
                }
-               report.AddCallInfo(new ReportCallInfo(callType,number,callInfo.BeginCall,new DateTime((callInfo.EndCall-callInfo.BeginCall).Ticks),callInfo.Cost));
+               report.AddCallInfo(new ReportCallInfo(callType,telNumber,number,callInfo.BeginCall,new DateTime((callInfo.EndCall-callInfo.BeginCall).Ticks),callInfo.Cost));
            }
            return report;
        }

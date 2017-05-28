@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ATS;
+using ATS.Contracts;
 using ATS.Enums;
 using ATS.Subscriber;
 using BillingSystem;
@@ -16,31 +17,37 @@ namespace Task3
     {
         static void Main(string[] args)
         {
-            ReportProvider reportProvider = new ReportProvider();
-            Subscriber subscriber = new Subscriber("Ivan","Ivanov");
-            Contract contract = new Contract(subscriber,TariffType.Mini);
-            Thread.Sleep(2000);
-            Subscriber subscriber1 = new Subscriber("Petr", "Petrov");
-            Contract contract1 = new Contract(subscriber1, TariffType.Light);
-            Console.WriteLine(contract.Number);
-            Console.WriteLine(contract1.Number);
-            AutomaticTelephoneExchange automaticTelephoneExchange = new AutomaticTelephoneExchange();
-            var t1 = automaticTelephoneExchange.GeTerminal(contract);
-            var t2 = automaticTelephoneExchange.GeTerminal(contract1);
+            IAte automaticTelephoneExchange = new AutomaticTelephoneExchange();
+            IContract contract1 = new Contract(new Subscriber("Ivan", "Ivanov"), TariffType.Light);
+            Thread.Sleep(1000);
+            IContract contract2 = new Contract(new Subscriber("Petr", "Petrov"), TariffType.Mini);
+            Thread.Sleep(1000);
+            IContract contract3 = new Contract(new Subscriber("Mihail", "Mihailov"), TariffType.Ultra);
+            var t1 = automaticTelephoneExchange.GeTerminal(contract1);
+            var t2 = automaticTelephoneExchange.GeTerminal(contract2);
+            var t3 = automaticTelephoneExchange.GeTerminal(contract3);
             t1.ConnectToPort();
+            t2.ConnectToPort();
+            t3.ConnectToPort();
             t1.Call(t2.Number);
             Thread.Sleep(5000);
             t1.EndCall();
+            t3.Call(t1.Number);
+            Thread.Sleep(5000);
+            t3.EndCall();
+            t2.Call(t1.Number);
+            Thread.Sleep(5000);
+            t2.EndCall();
+            ReportProvider reportProvider = new ReportProvider();
             Billing billing = new Billing(automaticTelephoneExchange);
-            foreach (var item in reportProvider.SortCallsByType(billing.GetReport(t1.Number), TypeSortCalls.SortByCallType))
+            foreach (
+                var item in reportProvider.SortCallsByType(billing.GetReport(t1.Number), TypeSortCalls.SortByCallType))
             {
-                Console.WriteLine("Calls:\n Type {0} |\n Date: {1} |\n Duration: {2} | Cost: {3} | Telephone number: {4}",
-                    item.CallType, item.Date, item.Time.ToString("mm:ss"), item.Cost, item.Number);
+                Console.WriteLine(
+                    "Report for {5}\n Type {0} |\n Date: {1} |\n Duration: {2} | Cost: {3} | Target Telephone number: {4}",
+                    item.CallType, item.Date, item.Time.ToString("mm:ss"), item.Cost, item.TargetNumber, item.Number);
             }
             Console.ReadLine();
-
-
-
         }
     }
 }

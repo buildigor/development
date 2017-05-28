@@ -46,18 +46,22 @@ namespace ATS
           if (_port.ConnectToPort(this))
           {
               _port.CallPortEvent += IncomingCall;
-              _port.AnswerPortEvent += _port_AnswerPortEvent;
+              _port.AnswerPortEvent += Answer;
           }
           
       }
 
-      void _port_AnswerPortEvent(object sender, AnswerEventArgs e)
+     public void Answer(object sender, AnswerEventArgs e)
       {
           if (e.CallState==CallState.Answered)
           {
               Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", e.TargetPhoneNumber, e.PhoneNumber);
           }
-          Console.WriteLine("Terminal with number: {0}, have rejected call", e.PhoneNumber);
+          else
+          {
+             Console.WriteLine("Terminal with number: {0}, have rejected call", e.PhoneNumber); 
+          }
+          
       }
 
       public void Call(int targetNumber)

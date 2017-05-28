@@ -43,8 +43,13 @@ namespace ATS
             if (e is AnswerEventArgs)
             {
                 var answerArgs = (AnswerEventArgs) e;
-                _usersData[e.TargetPhoneNumber].Item1.AnswerCall(answerArgs.PhoneNumber, answerArgs.TargetPhoneNumber,
+                var callListFirst = _callInfoList.First(x => x.Number.Equals(answerArgs.PhoneNumber));
+                var port = _usersData[callListFirst.Number].Item1;
+                port.AnswerCall(answerArgs.PhoneNumber, answerArgs.TargetPhoneNumber,
                     answerArgs.CallState);
+              //  _usersData[e.TargetPhoneNumber].Item1.AnswerCall(answerArgs.PhoneNumber, answerArgs.TargetPhoneNumber,
+              //      answerArgs.CallState);
+
             }
         }
 
