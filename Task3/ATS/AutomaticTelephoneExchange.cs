@@ -60,6 +60,7 @@ namespace ATS
                 info.Cost = _usersData[info.Number].Item2.Tariff.CostCallPerMinute*
                                  (info.EndCall - info.BeginCall).Minutes;
                 _usersData[info.Number].Item2.Debit(info.Cost);
+               _usersData[args.PhoneNumber].Item1.EndCall(args.PhoneNumber);
             }
         }
 

@@ -49,6 +49,7 @@ namespace ATS
               _port.AnswerPortEvent += Answer;
           }
       }
+
       public void DisconnectFromPort()
       {
           if (_port.DisconnectFromPort(this))
@@ -106,6 +107,7 @@ namespace ATS
               else if (f == 'N' || f == 'n')
               {
                   k = false;
+                  Console.WriteLine();
                   EndCall();
               }
               else

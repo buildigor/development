@@ -25,37 +25,31 @@ namespace ATS
 
         public bool ConnectToPort(Terminal terminal)
         {
-            if (PortState == PortState.Disconnect)
-            {
-                PortState = PortState.Connect;
-                terminal.AnswerEvent += terminal_AnswerEvent;
-                terminal.CallEvent += terminal_CallEvent;
-                terminal.EndCallEvent += terminal_EndCallEvent;
-            }
+            if (PortState != PortState.Disconnect) return true;
+            PortState = PortState.Connect;
+            terminal.AnswerEvent += terminal_AnswerEvent;
+            terminal.CallEvent += terminal_CallEvent;
+            terminal.EndCallEvent += terminal_EndCallEvent;
             return true;
         }
 
         public bool DisconnectFromPort(Terminal terminal)
         {
-            if (PortState == PortState.Connect)
-            {
-                PortState = PortState.Disconnect;
-                terminal.AnswerEvent -= terminal_AnswerEvent;
-                terminal.CallEvent -= terminal_CallEvent;
-                terminal.EndCallEvent -= terminal_EndCallEvent;
-            }
+            if (PortState != PortState.Connect) return false;
+            PortState = PortState.Disconnect;
+            terminal.AnswerEvent -= terminal_AnswerEvent;
+            terminal.CallEvent -= terminal_CallEvent;
+            terminal.EndCallEvent -= terminal_EndCallEvent;
             return false;
         }
 
         public bool InCallPort(Terminal terminal)
         {
-            if (PortState != PortState.InCall)
-            {
-                PortState = PortState.InCall;
-                terminal.AnswerEvent -= terminal_AnswerEvent;
-                terminal.CallEvent -= terminal_CallEvent;
-                terminal.EndCallEvent -= terminal_EndCallEvent;
-            }
+            if (PortState == PortState.InCall) return false;
+            PortState = PortState.InCall;
+            terminal.AnswerEvent -= terminal_AnswerEvent;
+            terminal.CallEvent -= terminal_CallEvent;
+            terminal.EndCallEvent -= terminal_EndCallEvent;
             return false;
         }
 
@@ -110,6 +104,10 @@ namespace ATS
         public void AnswerCall(int number, int targetNumber, CallState state)
         {
             OnAnswerPortEvent(number, targetNumber, state);
+        }
+        public void EndCall(int number)
+        {
+            Console.WriteLine("Terminal with number: {0}, have rejected call", number); 
         }
     }
 }
