@@ -47,9 +47,6 @@ namespace ATS
                 var port = _usersData[callListFirst.Number].Item1;
                 port.AnswerCall(answerArgs.PhoneNumber, answerArgs.TargetPhoneNumber,
                     answerArgs.CallState);
-              //  _usersData[e.TargetPhoneNumber].Item1.AnswerCall(answerArgs.PhoneNumber, answerArgs.TargetPhoneNumber,
-              //      answerArgs.CallState);
-
             }
         }
 
@@ -61,7 +58,7 @@ namespace ATS
                 CallInfo info = _callInfoList.First(x => x.Number.Equals(args.PhoneNumber));
                 info.EndCall = DateTime.Now;
                 info.Cost = _usersData[info.Number].Item2.Tariff.CostCallPerMinute*
-                                 (info.EndCall.Minute - info.BeginCall.Minute);
+                                 (info.EndCall - info.BeginCall).Minutes;
                 _usersData[info.Number].Item2.Debit(info.Cost);
             }
         }

@@ -48,7 +48,14 @@ namespace ATS
               _port.CallPortEvent += IncomingCall;
               _port.AnswerPortEvent += Answer;
           }
-          
+      }
+      public void DisconnectFromPort()
+      {
+          if (_port.DisconnectFromPort(this))
+          {
+              _port.CallPortEvent -= IncomingCall;
+              _port.AnswerPortEvent -= Answer;
+          }
       }
 
      public void Answer(object sender, AnswerEventArgs e)

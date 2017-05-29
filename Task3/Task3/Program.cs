@@ -29,8 +29,9 @@ namespace Task3
             t1.ConnectToPort();
             t2.ConnectToPort();
             t3.ConnectToPort();
-            //t1.Call(t1.Number);
-            //Thread.Sleep(5000);
+            t1.Call(t1.Number);
+            Thread.Sleep(5000);
+            //t2.DisconnectFromPort();
             t1.Call(t2.Number);
             Thread.Sleep(5000);
             t1.EndCall();
