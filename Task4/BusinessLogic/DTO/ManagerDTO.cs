@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace BusinessLogic.DTO
 {
-   public class Client
+   public class ManagerDto
     {
         public int Id { get; set; }
-        public string FullName { get; set; }
+        public string SecondName { get; set; }
     }
 }

@@ -1,55 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository.Interfaces;
 using Model;
-using Manager = DAL.Models.Manager;
 
 namespace DAL.Repository
 {
    public class ManagerRepository:IRepository<Manager>
    {
-       private DataModelContainer _context;
+       private readonly DataModelContainer _context;
 
        public ManagerRepository(DataModelContainer context)
        {
            _context = context;
        }
+
        public void Add(Manager item)
        {
-           throw new NotImplementedException();
+           _context.Managers.Add(item);
        }
 
-       public void Remove(Manager item)
+       public void Delete(int id)
        {
-           throw new NotImplementedException();
-       }
-
-       public int? GetId(Manager item)
-       {
-           throw new NotImplementedException();
+           Manager manager = _context.Managers.Find(id);
+           if (manager!=null)
+           {
+               _context.Managers.Remove(manager);
+           }
        }
 
        public IEnumerable<Manager> GetAll()
        {
-           throw new NotImplementedException();
+           return _context.Managers.ToList();
+       }
+
+       public IEnumerable<Manager> Find(Func<Manager, bool> predicate)
+       {
+           return _context.Managers.Where(predicate).ToList();
        }
 
        public Manager GetById(int id)
        {
-           throw new NotImplementedException();
-       }
-
-       public void SaveChanges()
-       {
-           throw new NotImplementedException();
+         return  _context.Managers.Find(id);
        }
 
        public void Update(Manager item)
        {
-           throw new NotImplementedException();
+           _context.Entry(item).State=EntityState.Modified;
        }
     }
 }

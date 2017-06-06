@@ -1,55 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository.Interfaces;
 using Model;
-using Client = DAL.Models.Client;
 
 namespace DAL.Repository
 {
   public  class ClientRepository:IRepository<Client>
   {
-      private DataModelContainer _context;
+      private readonly DataModelContainer _context;
 
       public ClientRepository(DataModelContainer context)
       {
           _context = context;
       }
-      public void Add(Client item)
+      public void Add(Client client)
       {
-          throw new NotImplementedException();
+          _context.Clients.Add(client);
       }
 
-      public void Remove(Client item)
+      public void Delete(int id)
       {
-          throw new NotImplementedException();
+          Client client = _context.Clients.Find(id);
+          if (client != null)
+          {
+              _context.Clients.Remove(client);
+          }
       }
-
-      public int? GetId(Client item)
-      {
-          throw new NotImplementedException();
-      }
-
       public IEnumerable<Client> GetAll()
       {
-          throw new NotImplementedException();
+          return _context.Clients;
+      }
+
+      public IEnumerable<Client> Find(Func<Client, bool> predicate)
+      {
+          return _context.Clients.Where((predicate)).ToList();
       }
 
       public Client GetById(int id)
       {
-          throw new NotImplementedException();
+          return _context.Clients.Find(id);
       }
-
-      public void SaveChanges()
+      public void Update(Client client)
       {
-          throw new NotImplementedException();
-      }
-
-      public void Update(Client item)
-      {
-          throw new NotImplementedException();
+          _context.Entry(client).State=EntityState.Modified;
       }
     }
 }

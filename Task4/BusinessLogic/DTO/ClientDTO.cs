@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace BusinessLogic.DTO
 {
-   public class Client
+   public class ClientDto
     {
         public int Id { get; set; }
         public string FullName { get; set; }

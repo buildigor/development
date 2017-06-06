@@ -57,6 +57,7 @@
     <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\CsvWorkerInfoRepository.cs" />
     <Compile Include="Repository\Interfaces\IRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Repository\ManagerRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\SaleInfoRepository.cs" />

@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 using DAL.Repository;
 using DAL.Repository.Interfaces;
 using Model;
-using Client = DAL.Models.Client;
-using Manager = DAL.Models.Manager;
-using Product = DAL.Models.Product;
-using SaleInfo = DAL.Models.SaleInfo;
 
 namespace DAL
 {
-  public class UnitOfWork
+  public class UnitOfWork:IUnitOfWork
   {
       private DataModelContainer _context;
       private ClientRepository _clientRepository;
@@ -27,6 +23,17 @@ namespace DAL
       public IRepository<Client> Clients { get { return _clientRepository ??(_clientRepository= new ClientRepository(_context)); } }
       public IRepository<Manager> Managers { get { return _managerRepository ?? (_managerRepository = new ManagerRepository(_context)); } }
       public IRepository<Product> Products { get { return _productRepository ?? (_productRepository = new ProductRepository(_context)); } }
-      public IRepository<SaleInfo> SalesInfo { get { return _saleInfoRepository ?? (_saleInfoRepository = new SaleInfoRepository(_context)); } } 
+      public IRepository<SaleInfo> SalesInfo { get { return _saleInfoRepository ?? (_saleInfoRepository = new SaleInfoRepository(_context)); } }
+      public void Save()
+      {
+          _context.SaveChanges();
+      }
+
+      public void Dispose()
+      {
+          if (_context == null) return;
+          _context.Dispose();
+          _context = null;
+      }
   }
 }

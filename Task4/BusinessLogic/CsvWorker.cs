@@ -10,8 +10,8 @@ namespace BusinessLogic
     public class CsvWorker:IDisposable
     {
         private FileSystemWatcher _watcher;
-        private string _serverFolder;
-        private string _doneFolder;
+        private readonly string _serverFolder;
+        private readonly string _doneFolder;
 
         public CsvWorker(string serverFolder, string doneFolder)
         {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository.Interfaces;
 using Model;
-using SaleInfo = DAL.Models.SaleInfo;
 
 namespace DAL.Repository
 {
@@ -17,39 +17,39 @@ namespace DAL.Repository
       {
           _context = context;
       }
+
       public void Add(SaleInfo item)
       {
-          throw new NotImplementedException();
+          _context.SaleInfoes.Add(item);
       }
 
-      public void Remove(SaleInfo item)
+      public void Delete(int id)
       {
-          throw new NotImplementedException();
-      }
-
-      public int? GetId(SaleInfo item)
-      {
-          throw new NotImplementedException();
+          SaleInfo saleInfo = _context.SaleInfoes.Find(id);
+          if (saleInfo!=null)
+          {
+              _context.SaleInfoes.Remove(saleInfo);
+          }
       }
 
       public IEnumerable<SaleInfo> GetAll()
       {
-          throw new NotImplementedException();
+          return _context.SaleInfoes;
+      }
+
+      public IEnumerable<SaleInfo> Find(Func<SaleInfo, bool> predicate)
+      {
+          return _context.SaleInfoes.Where(predicate).ToList();
       }
 
       public SaleInfo GetById(int id)
       {
-          throw new NotImplementedException();
-      }
-
-      public void SaveChanges()
-      {
-          throw new NotImplementedException();
+          return _context.SaleInfoes.Find(id);
       }
 
       public void Update(SaleInfo item)
       {
-          throw new NotImplementedException();
+          _context.Entry(item).State=EntityState.Modified;
       }
-    }
+  }
 }
