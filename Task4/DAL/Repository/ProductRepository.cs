@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository.Interfaces;
 using Model;
+using Product = DAL.Models.Product;
 
 namespace DAL.Repository
 {
-    public class ProductRepository : IRepository<Product>
+    public class ProductRepository : IRepository<Models.Product>
     {
         private readonly DataModelContainer _context;
 
@@ -18,38 +19,48 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public void Add(Product item)
+        private Model.Product ObjectToEntity(Models.Product product)
         {
-            _context.Products.Add(item);
+            return new Model.Product
+            {
+                Name = product.Name
+            };
         }
 
-        public void Delete(int id)
+        private Models.Product EntityToObject(Model.Product product)
         {
-            Product product = _context.Products.Find(id);
-            if (product!=null)
+            return new Product
             {
-                _context.Products.Remove(product);
+                Name = product.Name
+            };
+        }
+        public void Create(Product product)
+        {
+            _context.Products.Add(ObjectToEntity(product));
+        }
+
+        public int? GetId(Product product)
+        {
+            var tmp = _context.Products.FirstOrDefault(p => (p.Name == product.Name));
+            if (tmp == null)
+            {
+                return null;
             }
+            return tmp.Id;
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return _context.Products;
-        }
-
-        public IEnumerable<Product> Find(Func<Product, bool> predicate)
-        {
-            return _context.Products.Where(predicate).ToList();
+            return _context.Products.Select(x => new Product(){Id = x.Id,Name = x.Name});
         }
 
         public Product GetById(int id)
         {
-            return _context.Products.Find(id);
+            return EntityToObject(_context.Products.FirstOrDefault(x => x.Id == id));
         }
 
         public void Update(Product item)
         {
-            _context.Entry(item).State=EntityState.Modified;
         }
     }
 }

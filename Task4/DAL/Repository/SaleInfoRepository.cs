@@ -4,52 +4,91 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DAL.Repository.Interfaces;
 using Model;
+using SaleInfo = DAL.Models.SaleInfo;
+
 
 namespace DAL.Repository
 {
-  public  class SaleInfoRepository:IRepository<SaleInfo>
+  public  class SaleInfoRepository:IRepository<Models.SaleInfo>
   {
-      private DataModelContainer _context;
+      private readonly DataModelContainer _context;
 
       public SaleInfoRepository(DataModelContainer context)
       {
           _context = context;
       }
 
-      public void Add(SaleInfo item)
+      private Model.SaleInfo ObjectToEntity(Models.SaleInfo saleInfo)
       {
-          _context.SaleInfoes.Add(item);
+          return new Model.SaleInfo
+          {
+              ManagerId = saleInfo.ManagerId,
+              ClientId = saleInfo.ClientId,
+              ProductId = saleInfo.ProductId,
+              Date = saleInfo.Date,
+              Amount = saleInfo.Amount
+          };
       }
 
-      public void Delete(int id)
+      private Models.SaleInfo EntityToObject(Model.SaleInfo saleInfo)
       {
-          SaleInfo saleInfo = _context.SaleInfoes.Find(id);
-          if (saleInfo!=null)
+          return new SaleInfo
           {
-              _context.SaleInfoes.Remove(saleInfo);
+              ManagerId = saleInfo.ManagerId,
+              ClientId = saleInfo.ClientId,
+              ProductId = saleInfo.ProductId,
+              Date = saleInfo.Date,
+              Amount = saleInfo.Amount
+          };
+      }
+
+      public void Create(SaleInfo saleInfo)
+      {
+          //Mapper.Initialize(cfg => cfg.CreateMap<Models.SaleInfo, Model.SaleInfo>());
+          //_context.SaleInfoes.Add(Mapper.Map<Models.SaleInfo, Model.SaleInfo>(saleInfo));
+          _context.SaleInfoes.Add(ObjectToEntity(saleInfo));
+      }
+
+      public int? GetId(SaleInfo saleInfo)
+      {
+          var tmp = _context.SaleInfoes.FirstOrDefault(s => (s.Id == saleInfo.Id));
+          if (tmp == null)
+          {
+              return null;
           }
+          return tmp.Id;
       }
 
       public IEnumerable<SaleInfo> GetAll()
       {
-          return _context.SaleInfoes;
-      }
-
-      public IEnumerable<SaleInfo> Find(Func<SaleInfo, bool> predicate)
-      {
-          return _context.SaleInfoes.Where(predicate).ToList();
+          return _context.SaleInfoes.Select(s => new DAL.Models.SaleInfo()
+          {
+              Id = s.Id,
+              Date = s.Date,
+              ManagerId = s.ManagerId,
+              ClientId = s.ClientId,
+              ProductId = s.ProductId,
+              Amount = s.Amount
+          });
       }
 
       public SaleInfo GetById(int id)
       {
-          return _context.SaleInfoes.Find(id);
+          return EntityToObject(_context.SaleInfoes.FirstOrDefault(x => x.Id == id));
       }
 
-      public void Update(SaleInfo item)
+      public void Update(SaleInfo saleInfo)
       {
-          _context.Entry(item).State=EntityState.Modified;
+          var sale = _context.SaleInfoes.FirstOrDefault(x => x.Id == saleInfo.Id);
+          if (sale==null)return;
+          sale.ManagerId = saleInfo.ManagerId;
+          sale.ClientId = saleInfo.ClientId;
+          sale.ProductId = saleInfo.ProductId;
+          sale.Date = saleInfo.Date;
+          sale.Amount = saleInfo.Amount;
       }
   }
 }

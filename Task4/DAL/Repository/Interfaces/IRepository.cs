@@ -9,10 +9,9 @@ namespace DAL.Repository.Interfaces
 {
    public interface IRepository<T> where T:class 
    {
-       void Add(T item);
-       void Delete(int id);
+       void Create(T item);
+       int? GetId(T item);
        IEnumerable<T> GetAll();
-       IEnumerable<T> Find(Func<T, Boolean> predicate);
        T GetById(int id);
        void Update(T item);
    }

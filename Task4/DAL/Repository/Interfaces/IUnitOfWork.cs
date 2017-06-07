@@ -9,10 +9,10 @@ namespace DAL.Repository.Interfaces
 {
    public interface IUnitOfWork:IDisposable
     {
-       IRepository<Client> Clients { get; }
-       IRepository<Manager> Managers { get; }
-       IRepository<Product> Products { get; }
-       IRepository<SaleInfo> SalesInfo { get; }
+       IRepository<Models.Client> Clients { get; }
+       IRepository<Models.Manager> Managers { get; }
+       IRepository<Models.Product> Products { get; }
+       IRepository<Models.SaleInfo> SalesInfo { get; }
        void Save();
     }
 }

@@ -20,10 +20,10 @@ namespace DAL
       {
           _context = new DataModelContainer();
       }
-      public IRepository<Client> Clients { get { return _clientRepository ??(_clientRepository= new ClientRepository(_context)); } }
-      public IRepository<Manager> Managers { get { return _managerRepository ?? (_managerRepository = new ManagerRepository(_context)); } }
-      public IRepository<Product> Products { get { return _productRepository ?? (_productRepository = new ProductRepository(_context)); } }
-      public IRepository<SaleInfo> SalesInfo { get { return _saleInfoRepository ?? (_saleInfoRepository = new SaleInfoRepository(_context)); } }
+      public IRepository<Models.Client> Clients { get { return _clientRepository ?? (_clientRepository = new ClientRepository(_context)); } }
+      public IRepository<Models.Manager> Managers { get { return _managerRepository ?? (_managerRepository = new ManagerRepository(_context)); } }
+      public IRepository<Models.Product> Products { get { return _productRepository ?? (_productRepository = new ProductRepository(_context)); } }
+      public IRepository<Models.SaleInfo> SalesInfo { get { return _saleInfoRepository ?? (_saleInfoRepository = new SaleInfoRepository(_context)); } }
       public void Save()
       {
           _context.SaveChanges();

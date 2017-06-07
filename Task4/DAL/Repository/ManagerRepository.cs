@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository.Interfaces;
 using Model;
+using Manager = DAL.Models.Manager;
 
 namespace DAL.Repository
 {
-   public class ManagerRepository:IRepository<Manager>
+   public class ManagerRepository:IRepository<Models.Manager>
    {
        private readonly DataModelContainer _context;
 
@@ -17,39 +18,51 @@ namespace DAL.Repository
        {
            _context = context;
        }
-
-       public void Add(Manager item)
+       private Model.Manager ObjectToEntity(Models.Manager manager)
        {
-           _context.Managers.Add(item);
+           return new Model.Manager
+           {
+               SecondName = manager.SecondName
+           };
        }
 
-       public void Delete(int id)
+       private Models.Manager EntityToObject(Model.Manager manager)
        {
-           Manager manager = _context.Managers.Find(id);
-           if (manager!=null)
+           return new Manager
            {
-               _context.Managers.Remove(manager);
+               SecondName = manager.SecondName
+           };
+       }
+
+       public void Create(Manager manager)
+       {
+           _context.Managers.Add(ObjectToEntity(manager));
+       }
+
+       public int? GetId(Manager manager)
+       {
+           var tmp = _context.Managers.FirstOrDefault(m => (m.SecondName == manager.SecondName));
+           if (tmp == null)
+           {
+               return null;
            }
+           return tmp.Id;
        }
 
        public IEnumerable<Manager> GetAll()
        {
-           return _context.Managers.ToList();
-       }
-
-       public IEnumerable<Manager> Find(Func<Manager, bool> predicate)
-       {
-           return _context.Managers.Where(predicate).ToList();
+           return _context.Managers.Select(x => new Manager() {Id = x.Id, SecondName = x.SecondName});
        }
 
        public Manager GetById(int id)
        {
-         return  _context.Managers.Find(id);
+           return EntityToObject(_context.Managers.FirstOrDefault(x => x.Id == id));
        }
 
-       public void Update(Manager item)
+       public void Update(Manager manager)
        {
-           _context.Entry(item).State=EntityState.Modified;
+           var tmp = _context.Managers.FirstOrDefault(m => (m.Id == manager.Id));
+           if (tmp != null) tmp.SecondName = manager.SecondName;
        }
-    }
+   }
 }

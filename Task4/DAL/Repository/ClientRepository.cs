@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Repository.Interfaces;
 using Model;
+using Client = DAL.Models.Client;
 
 namespace DAL.Repository
 {
-  public  class ClientRepository:IRepository<Client>
+  public  class ClientRepository:IRepository<Models.Client>
   {
       private readonly DataModelContainer _context;
 
@@ -17,36 +18,48 @@ namespace DAL.Repository
       {
           _context = context;
       }
-      public void Add(Client client)
+      private Model.Client ObjectToEntity(Models.Client client)
       {
-          _context.Clients.Add(client);
+          return new Model.Client
+          {
+              FullName = client.FullName
+          };
       }
 
-      public void Delete(int id)
+      private Models.Client EntityToObject(Model.Client client)
       {
-          Client client = _context.Clients.Find(id);
-          if (client != null)
+          return new Client
           {
-              _context.Clients.Remove(client);
-          }
+              FullName = client.FullName
+          };
       }
+      public void Create(Client client)
+      {
+          _context.Clients.Add(ObjectToEntity(client));
+      }
+
+      public int? GetId(Client client)
+      {
+          var tmp = _context.Clients.FirstOrDefault(c => (c.FullName == client.FullName));
+          if (tmp == null)
+          {
+              return null;
+          }
+          return tmp.Id;
+      }
+
       public IEnumerable<Client> GetAll()
       {
-          return _context.Clients;
-      }
-
-      public IEnumerable<Client> Find(Func<Client, bool> predicate)
-      {
-          return _context.Clients.Where((predicate)).ToList();
+          return _context.Clients.Select(x => new Client() {Id = x.Id, FullName = x.FullName});
       }
 
       public Client GetById(int id)
       {
-          return _context.Clients.Find(id);
+          return EntityToObject(_context.Clients.FirstOrDefault(x => x.Id == id));
       }
+
       public void Update(Client client)
       {
-          _context.Entry(client).State=EntityState.Modified;
       }
-    }
+  }
 }
