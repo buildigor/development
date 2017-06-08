@@ -51,9 +51,10 @@ namespace BusinessLogic
            }
            var sale = new DAL.Models.SaleInfo()
            {
+
                ClientId = (int)clientId,
-               ManagerId = (int) managerId,
-               ProductId = (int) productId,
+               ManagerId = (int)managerId,
+               ProductId = (int)productId,
                Date = saleDto.Date,
                Amount = saleDto.Amount
            };

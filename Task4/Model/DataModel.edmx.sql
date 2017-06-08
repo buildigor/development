@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/07/2017 23:15:59
+-- Date Created: 06/08/2017 11:59:18
 -- Generated from EDMX file: G:\epam\Projects\vanovich\Task4\Model\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [SalesDB];
+USE [Sales];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,35 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ManagerSaleInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleInfoes] DROP CONSTRAINT [FK_ManagerSaleInfo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ClientSaleInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleInfoes] DROP CONSTRAINT [FK_ClientSaleInfo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProductSaleInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleInfoes] DROP CONSTRAINT [FK_ProductSaleInfo];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Managers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Managers];
-GO
-IF OBJECT_ID(N'[dbo].[Clients]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Clients];
-GO
-IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Products];
-GO
-IF OBJECT_ID(N'[dbo].[SaleInfoes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SaleInfoes];
-GO
-IF OBJECT_ID(N'[dbo].[CsvWorkerInfoes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CsvWorkerInfoes];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -79,17 +55,14 @@ CREATE TABLE [dbo].[SaleInfoes] (
     [Amount] float  NOT NULL,
     [ManagerId] int  NOT NULL,
     [ClientId] int  NOT NULL,
-    [ProductId] int  NOT NULL,
-    [Manager_Id] int  NOT NULL,
-    [Client_Id] int  NOT NULL,
-    [Product_Id] int  NOT NULL
+    [ProductId] int  NOT NULL
 );
 GO
 
 -- Creating table 'CsvWorkerInfoes'
 CREATE TABLE [dbo].[CsvWorkerInfoes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [FileDoneName] nvarchar(max)  NOT NULL
+    [FileNameDone] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -131,10 +104,10 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Manager_Id] in table 'SaleInfoes'
+-- Creating foreign key on [ManagerId] in table 'SaleInfoes'
 ALTER TABLE [dbo].[SaleInfoes]
 ADD CONSTRAINT [FK_ManagerSaleInfo]
-    FOREIGN KEY ([Manager_Id])
+    FOREIGN KEY ([ManagerId])
     REFERENCES [dbo].[Managers]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -143,13 +116,13 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ManagerSaleInfo'
 CREATE INDEX [IX_FK_ManagerSaleInfo]
 ON [dbo].[SaleInfoes]
-    ([Manager_Id]);
+    ([ManagerId]);
 GO
 
--- Creating foreign key on [Client_Id] in table 'SaleInfoes'
+-- Creating foreign key on [ClientId] in table 'SaleInfoes'
 ALTER TABLE [dbo].[SaleInfoes]
 ADD CONSTRAINT [FK_ClientSaleInfo]
-    FOREIGN KEY ([Client_Id])
+    FOREIGN KEY ([ClientId])
     REFERENCES [dbo].[Clients]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -158,13 +131,13 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClientSaleInfo'
 CREATE INDEX [IX_FK_ClientSaleInfo]
 ON [dbo].[SaleInfoes]
-    ([Client_Id]);
+    ([ClientId]);
 GO
 
--- Creating foreign key on [Product_Id] in table 'SaleInfoes'
+-- Creating foreign key on [ProductId] in table 'SaleInfoes'
 ALTER TABLE [dbo].[SaleInfoes]
 ADD CONSTRAINT [FK_ProductSaleInfo]
-    FOREIGN KEY ([Product_Id])
+    FOREIGN KEY ([ProductId])
     REFERENCES [dbo].[Products]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -173,7 +146,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProductSaleInfo'
 CREATE INDEX [IX_FK_ProductSaleInfo]
 ON [dbo].[SaleInfoes]
-    ([Product_Id]);
+    ([ProductId]);
 GO
 
 -- --------------------------------------------------

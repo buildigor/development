@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5f93effb92cf47c790e5a13d07019240" Name="Diagram1" >
-        <EntityTypeShape EntityType="DataModel.Manager" Width="1.5" PointX="1.875" PointY="4.625" />
-        <EntityTypeShape EntityType="DataModel.Client" Width="1.5" PointX="5.125" PointY="4.625" />
-        <EntityTypeShape EntityType="DataModel.Product" Width="1.5" PointX="7.875" PointY="4.5" />
-        <EntityTypeShape EntityType="DataModel.SaleInfo" Width="1.5" PointX="4.75" PointY="0.5" />
+      <Diagram DiagramId="b1beace11e884204a587071fb05d5414" Name="Diagram1" >
+        <EntityTypeShape EntityType="DataModel.Manager" Width="1.5" PointX="1.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataModel.Client" Width="1.5" PointX="6.125" PointY="4.625" />
+        <EntityTypeShape EntityType="DataModel.Product" Width="1.5" PointX="8.25" PointY="5.25" />
+        <EntityTypeShape EntityType="DataModel.SaleInfo" Width="1.5" PointX="4.25" PointY="2.25" />
+        <EntityTypeShape EntityType="DataModel.CsvWorkerInfo" Width="1.5" PointX="7.75" PointY="1.875" />
         <AssociationConnector Association="DataModel.ManagerSaleInfo" />
         <AssociationConnector Association="DataModel.ClientSaleInfo" />
         <AssociationConnector Association="DataModel.ProductSaleInfo" />
-        <EntityTypeShape EntityType="DataModel.CsvWorkerInfo" Width="1.5" PointX="11" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

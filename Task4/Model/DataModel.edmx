@@ -13,15 +13,15 @@
     <EntitySet Name="CsvWorkerInfoes" EntityType="DataModel.Store.CsvWorkerInfoes" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ManagerSaleInfo" Association="DataModel.Store.ManagerSaleInfo">
       <End Role="Manager" EntitySet="Managers" />
-      <End Role="SaleInfo" EntitySet="SaleInfoes" />
+      <End Role="SaleInfoes" EntitySet="SaleInfoes" />
     </AssociationSet>
     <AssociationSet Name="ClientSaleInfo" Association="DataModel.Store.ClientSaleInfo">
       <End Role="Client" EntitySet="Clients" />
-      <End Role="SaleInfo" EntitySet="SaleInfoes" />
+      <End Role="SaleInfoes" EntitySet="SaleInfoes" />
     </AssociationSet>
     <AssociationSet Name="ProductSaleInfo" Association="DataModel.Store.ProductSaleInfo">
       <End Role="Product" EntitySet="Products" />
-      <End Role="SaleInfo" EntitySet="SaleInfoes" />
+      <End Role="SaleInfoes" EntitySet="SaleInfoes" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Managers">
@@ -55,50 +55,47 @@
     <Property Name="ManagerId" Type="int" Nullable="false" />
     <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
-    <Property Name="Manager_Id" Type="int" Nullable="false" />
-    <Property Name="Client_Id" Type="int" Nullable="false" />
-    <Property Name="Product_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CsvWorkerInfoes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FileDoneName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileNameDone" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="ManagerSaleInfo">
     <End Role="Manager" Type="DataModel.Store.Managers" Multiplicity="1" />
-    <End Role="SaleInfo" Type="DataModel.Store.SaleInfoes" Multiplicity="*" />
+    <End Role="SaleInfoes" Type="DataModel.Store.SaleInfoes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Manager">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="SaleInfo">
-        <PropertyRef Name="Manager_Id" />
+      <Dependent Role="SaleInfoes">
+        <PropertyRef Name="ManagerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ClientSaleInfo">
     <End Role="Client" Type="DataModel.Store.Clients" Multiplicity="1" />
-    <End Role="SaleInfo" Type="DataModel.Store.SaleInfoes" Multiplicity="*" />
+    <End Role="SaleInfoes" Type="DataModel.Store.SaleInfoes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="SaleInfo">
-        <PropertyRef Name="Client_Id" />
+      <Dependent Role="SaleInfoes">
+        <PropertyRef Name="ClientId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ProductSaleInfo">
     <End Role="Product" Type="DataModel.Store.Products" Multiplicity="1" />
-    <End Role="SaleInfo" Type="DataModel.Store.SaleInfoes" Multiplicity="*" />
+    <End Role="SaleInfoes" Type="DataModel.Store.SaleInfoes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="SaleInfo">
-        <PropertyRef Name="Product_Id" />
+      <Dependent Role="SaleInfoes">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -111,19 +108,19 @@
           <EntitySet Name="Clients" EntityType="DataModel.Client" />
           <EntitySet Name="Products" EntityType="DataModel.Product" />
           <EntitySet Name="SaleInfoes" EntityType="DataModel.SaleInfo" />
+          <EntitySet Name="CsvWorkerInfoes" EntityType="DataModel.CsvWorkerInfo" />
           <AssociationSet Name="ManagerSaleInfo" Association="DataModel.ManagerSaleInfo">
             <End Role="Manager" EntitySet="Managers" />
-            <End Role="SaleInfo" EntitySet="SaleInfoes" />
+            <End Role="SaleInfoes" EntitySet="SaleInfoes" />
           </AssociationSet>
           <AssociationSet Name="ClientSaleInfo" Association="DataModel.ClientSaleInfo">
             <End Role="Client" EntitySet="Clients" />
-            <End Role="SaleInfo" EntitySet="SaleInfoes" />
+            <End Role="SaleInfoes" EntitySet="SaleInfoes" />
           </AssociationSet>
           <AssociationSet Name="ProductSaleInfo" Association="DataModel.ProductSaleInfo">
             <End Role="Product" EntitySet="Products" />
-            <End Role="SaleInfo" EntitySet="SaleInfoes" />
+            <End Role="SaleInfoes" EntitySet="SaleInfoes" />
           </AssociationSet>
-          <EntitySet Name="CsvWorkerInfoes" EntityType="DataModel.CsvWorkerInfo" />
         </EntityContainer>
         <EntityType Name="Manager">
           <Key>
@@ -131,7 +128,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SecondName" Type="String" Nullable="false" />
-          <NavigationProperty Name="SaleInfoes" Relationship="DataModel.ManagerSaleInfo" FromRole="Manager" ToRole="SaleInfo" />
+          <NavigationProperty Name="SaleInfoes" Relationship="DataModel.ManagerSaleInfo" FromRole="Manager" ToRole="SaleInfoes" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -139,7 +136,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FullName" Type="String" Nullable="false" />
-          <NavigationProperty Name="SaleInfoes" Relationship="DataModel.ClientSaleInfo" FromRole="Client" ToRole="SaleInfo" />
+          <NavigationProperty Name="SaleInfoes" Relationship="DataModel.ClientSaleInfo" FromRole="Client" ToRole="SaleInfoes" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -147,7 +144,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <NavigationProperty Name="SaleInfoes" Relationship="DataModel.ProductSaleInfo" FromRole="Product" ToRole="SaleInfo" />
+          <NavigationProperty Name="SaleInfoes" Relationship="DataModel.ProductSaleInfo" FromRole="Product" ToRole="SaleInfoes" />
         </EntityType>
         <EntityType Name="SaleInfo">
           <Key>
@@ -159,29 +156,53 @@
           <Property Name="ManagerId" Type="Int32" Nullable="false" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Manager" Relationship="DataModel.ManagerSaleInfo" FromRole="SaleInfo" ToRole="Manager" />
-          <NavigationProperty Name="Client" Relationship="DataModel.ClientSaleInfo" FromRole="SaleInfo" ToRole="Client" />
-          <NavigationProperty Name="Product" Relationship="DataModel.ProductSaleInfo" FromRole="SaleInfo" ToRole="Product" />
+          <NavigationProperty Name="Manager" Relationship="DataModel.ManagerSaleInfo" FromRole="SaleInfoes" ToRole="Manager" />
+          <NavigationProperty Name="Client" Relationship="DataModel.ClientSaleInfo" FromRole="SaleInfoes" ToRole="Client" />
+          <NavigationProperty Name="Product" Relationship="DataModel.ProductSaleInfo" FromRole="SaleInfoes" ToRole="Product" />
         </EntityType>
-        <Association Name="ManagerSaleInfo">
-          <End Type="DataModel.Manager" Role="Manager" Multiplicity="1" />
-          <End Type="DataModel.SaleInfo" Role="SaleInfo" Multiplicity="*" />
-        </Association>
-        <Association Name="ClientSaleInfo">
-          <End Type="DataModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="DataModel.SaleInfo" Role="SaleInfo" Multiplicity="*" />
-        </Association>
-        <Association Name="ProductSaleInfo">
-          <End Type="DataModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="DataModel.SaleInfo" Role="SaleInfo" Multiplicity="*" />
-        </Association>
         <EntityType Name="CsvWorkerInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FileDoneName" Type="String" Nullable="false" />
+          <Property Name="FileNameDone" Type="String" Nullable="false" />
         </EntityType>
+        <Association Name="ManagerSaleInfo">
+          <End Type="DataModel.Manager" Role="Manager" Multiplicity="1" />
+          <End Type="DataModel.SaleInfo" Role="SaleInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleInfoes">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientSaleInfo">
+          <End Type="DataModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="DataModel.SaleInfo" Role="SaleInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleInfoes">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductSaleInfo">
+          <End Type="DataModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DataModel.SaleInfo" Role="SaleInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleInfoes">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -228,34 +249,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.CsvWorkerInfo)">
         <MappingFragment StoreEntitySet="CsvWorkerInfoes">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FileDoneName" ColumnName="FileDoneName" />
+          <ScalarProperty Name="FileNameDone" ColumnName="FileNameDone" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ManagerSaleInfo" TypeName="DataModel.ManagerSaleInfo" StoreEntitySet="SaleInfoes">
-      <EndProperty Name="Manager">
-        <ScalarProperty Name="Id" ColumnName="Manager_Id" />
-      </EndProperty>
-      <EndProperty Name="SaleInfo">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ClientSaleInfo" TypeName="DataModel.ClientSaleInfo" StoreEntitySet="SaleInfoes">
-      <EndProperty Name="Client">
-        <ScalarProperty Name="Id" ColumnName="Client_Id" />
-      </EndProperty>
-      <EndProperty Name="SaleInfo">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ProductSaleInfo" TypeName="DataModel.ProductSaleInfo" StoreEntitySet="SaleInfoes">
-      <EndProperty Name="Product">
-        <ScalarProperty Name="Id" ColumnName="Product_Id" />
-      </EndProperty>
-      <EndProperty Name="SaleInfo">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

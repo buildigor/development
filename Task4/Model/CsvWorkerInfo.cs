@@ -15,6 +15,6 @@ namespace Model
     public partial class CsvWorkerInfo
     {
         public int Id { get; set; }
-        public string FileDoneName { get; set; }
+        public string FileNameDone { get; set; }
     }
 }
