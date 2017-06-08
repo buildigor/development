@@ -47,9 +47,9 @@ namespace DAL.Repository
 
       public void Create(SaleInfo saleInfo)
       {
-          //Mapper.Initialize(cfg => cfg.CreateMap<Models.SaleInfo, Model.SaleInfo>());
-          //_context.SaleInfoes.Add(Mapper.Map<Models.SaleInfo, Model.SaleInfo>(saleInfo));
-          _context.SaleInfoes.Add(ObjectToEntity(saleInfo));
+          Mapper.Initialize(cfg => cfg.CreateMap<Models.SaleInfo, Model.SaleInfo>());
+          _context.SaleInfoes.Add(Mapper.Map<Models.SaleInfo, Model.SaleInfo>(saleInfo));
+         // _context.SaleInfoes.Add(ObjectToEntity(saleInfo));
       }
 
       public int? GetId(SaleInfo saleInfo)

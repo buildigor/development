@@ -14,7 +14,8 @@ namespace Task4
         {
             string serverFolder = ConfigurationManager.AppSettings["CSVUploadFolder"];
             string doneFolder = ConfigurationManager.AppSettings["DoneFolder"];
-            CsvWorker csvWorker = new CsvWorker(serverFolder,doneFolder);
+            string notDoneFolder = ConfigurationManager.AppSettings["NotDoneFolder"];
+            CsvWorker csvWorker = new CsvWorker(serverFolder,doneFolder,notDoneFolder);
             csvWorker.RunWatch();
             Console.WriteLine(@"Press 'q' to exit");
             while (Console.Read() != 'q')
