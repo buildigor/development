@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BusinessLogic.DTO;
+using NLog;
 
 namespace BusinessLogic
 {
@@ -16,7 +17,8 @@ namespace BusinessLogic
         private readonly string _serverFolder;
         private readonly string _doneFolder;
         private readonly string _notDoneFolder;
-        private RepositoryWorker _repositoryWorker;
+        private readonly RepositoryWorker _repositoryWorker;
+        private readonly Logger _logger;
 
         public CsvWorker(string serverFolder, string doneFolder,string notDoneFolder)
         {
@@ -24,12 +26,15 @@ namespace BusinessLogic
             _doneFolder = doneFolder;
             _notDoneFolder = notDoneFolder;
             _repositoryWorker = new RepositoryWorker();
-            _watcher = new FileSystemWatcher(_serverFolder,"*.csv");
-            _watcher.Created += _watcher_Created;
-            //if (!Directory.Exists(_doneFolder))
-            //{
-            //    Directory.CreateDirectory(_doneFolder);
-            //}
+            _logger = LogManager.GetCurrentClassLogger();
+           if (!Directory.Exists(_serverFolder))
+            {
+                Directory.CreateDirectory(_serverFolder);
+              //  _logger.Info("Directory {0} created",_serverFolder);
+                LoggerHelper.Message(string.Format("Directory {0} created",_serverFolder));
+            }
+           _watcher = new FileSystemWatcher(_serverFolder, "*.csv");
+           _watcher.Created += _watcher_Created;
         }
 
         private ICollection<SaleDto> ParsingFile(string path)
@@ -42,18 +47,21 @@ namespace BusinessLogic
             if (Regex.IsMatch(fileNameSplit[0], "^[a-zA-Z]+$") && Regex.IsMatch(fileNameSplit[1], "^[0-9]+$"))
             {
                 managerName = fileNameSplit[0];
-                Console.WriteLine("File name {0} format is valid",fileName);
+                LoggerHelper.Message(string.Format("File name {0} format is valid", fileName));
+               // Console.WriteLine("File name {0} format is valid",fileName);
             }
             else
             {
                 if (Regex.IsMatch(fileNameSplit[0], "^[0-9]+$") && Regex.IsMatch(fileNameSplit[1], "^[a-zA-Z]+$"))
                 {
                     managerName = fileNameSplit[1];
-                    Console.WriteLine("File name {0} format is valid but order is confused",fileName);
+                    LoggerHelper.Message(string.Format("File name {0} format is valid but order is confused", fileName));
+                   // Console.WriteLine("File name {0} format is valid but order is confused",fileName);
                 }
                 else
                 {
-                    Console.WriteLine("File name {0} format is not correct, expected format: \"Lastname_ddmmyyyy\"",fileName);
+                    LoggerHelper.Message(string.Format("File name {0} format is not correct, expected format: \"Lastname_ddmmyyyy\"", fileName));
+                   // Console.WriteLine("File name {0} format is not correct, expected format: \"Lastname_ddmmyyyy\"",fileName);
                     MoveFile(path,_notDoneFolder);
                     return null;
                 }
@@ -93,26 +101,28 @@ namespace BusinessLogic
             if (!Directory.Exists(destpath))
             {
                 Directory.CreateDirectory(destpath);
+                LoggerHelper.Message(string.Format("Created ditectory {0} ", destpath));
             }
             try
             {
                 if (File.Exists(path))
                 {
                     File.Move(path, destFileName);
-                    Console.WriteLine("File {1} moved to: {0}", destpath, fileName);
+                    LoggerHelper.Message(string.Format("File {1} moved to: {0}", destpath, fileName));
+                   // Console.WriteLine("File {1} moved to: {0}", destpath, fileName);
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("File Move error: {0}", e);
+                LoggerHelper.Error(string.Format("File Move error: {0}", e));
+               // Console.WriteLine("File Move error: {0}", e);
             }
 
                 
         }
         void  _watcher_Created(object sender, FileSystemEventArgs e)
         {
-            string s= string.Format("Created new file: {0}", e.Name);
-            Console.WriteLine(s);
+            LoggerHelper.Message(string.Format("Created new file: {0}", e.Name));
             var task = new Task(() =>
             {
                 var sales = ParsingFile(e.FullPath);
@@ -128,24 +138,24 @@ namespace BusinessLogic
 
         public void RunWatch()
         {
-            Console.WriteLine("Start watсhing folder {0}",_serverFolder);
+            LoggerHelper.Message(string.Format("Start watсhing folder {0}", _serverFolder));
+           // Console.WriteLine("Start watсhing folder {0}",_serverFolder);
             _watcher.EnableRaisingEvents = true;
         }
 
         public void StopWatch()
         {
-            Console.WriteLine("Watching Stopped");
+            LoggerHelper.Message("Watching Stopped");
+           // Console.WriteLine("Watching Stopped");
             _watcher.EnableRaisingEvents = false;
         }
 
         public void Dispose()
         {
-            if (_watcher!=null)
-            {
-                StopWatch();
-                _watcher.Dispose();
-                _watcher = null;
-            }
+            if (_watcher == null) return;
+            StopWatch();
+            _watcher.Dispose();
+            _watcher = null;
         }
     }
 }
