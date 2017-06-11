@@ -61,7 +61,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FileNameDone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileNameProcessed" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateProcessed" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="ManagerSaleInfo">
     <End Role="Manager" Type="DataModel.Store.Managers" Multiplicity="1" />
@@ -165,7 +166,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FileNameDone" Type="String" Nullable="false" />
+          <Property Name="FileNameProcessed" Type="String" Nullable="false" />
+          <Property Name="DateProcessed" Type="DateTime" Nullable="false" />
         </EntityType>
         <Association Name="ManagerSaleInfo">
           <End Type="DataModel.Manager" Role="Manager" Multiplicity="1" />
@@ -249,7 +251,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.CsvWorkerInfo)">
         <MappingFragment StoreEntitySet="CsvWorkerInfoes">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FileNameDone" ColumnName="FileNameDone" />
+          <ScalarProperty Name="FileNameProcessed" ColumnName="FileNameProcessed" />
+          <ScalarProperty Name="DateProcessed" ColumnName="DateProcessed" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

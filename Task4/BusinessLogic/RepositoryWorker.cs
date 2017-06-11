@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,9 +64,20 @@ namespace BusinessLogic
                };
                _unitOfWork.SalesInfo.Create(sale);
                _unitOfWork.Save();
+           }
+       }
 
-               //Mapper.Initialize(cfg=>cfg.CreateMap<,ManagerDto>());
-               //var managerId = Mapper.Map<Manager,ManagerDto>()
+       public void AddCsvFileProcessedInfo(string csvProcessed)
+       {
+           var csvProcessedInfo = new CsvWorkerInfo()
+           {
+               DateProcessed = DateTime.Now,
+               FileNameProcessed = csvProcessed
+           };
+           _unitOfWork.CsvsWorkerInfo.Create(csvProcessedInfo);
+           lock (_objLock)
+           {
+               _unitOfWork.Save();
            }
        }
    }

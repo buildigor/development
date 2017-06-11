@@ -48,9 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CsvWorker.cs" />
-    <Compile Include="DTO\ClientDTO.cs" />
-    <Compile Include="DTO\ManagerDTO.cs" />
-    <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\CsvProcessedDTO.cs" />
     <Compile Include="DTO\SaleDTO.cs" />
     <Compile Include="LoggerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

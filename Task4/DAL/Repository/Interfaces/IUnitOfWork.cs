@@ -13,6 +13,7 @@ namespace DAL.Repository.Interfaces
        IRepository<Models.Manager> Managers { get; }
        IRepository<Models.Product> Products { get; }
        IRepository<Models.SaleInfo> SalesInfo { get; }
+       IRepository<Models.CsvWorkerInfo> CsvsWorkerInfo { get; }
        void Save();
     }
 }

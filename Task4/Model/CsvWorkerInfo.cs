@@ -15,6 +15,7 @@ namespace Model
     public partial class CsvWorkerInfo
     {
         public int Id { get; set; }
-        public string FileNameDone { get; set; }
+        public string FileNameProcessed { get; set; }
+        public System.DateTime DateProcessed { get; set; }
     }
 }

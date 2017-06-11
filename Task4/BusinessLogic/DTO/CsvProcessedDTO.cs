@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.DTO
 {
-   public class ClientDto
+  public class CsvProcessedDto
     {
         public int Id { get; set; }
-        public string FullName { get; set; }
+        public string FileNameProcessed { get; set; }
+        public DateTime DateProcessed { get; set; }
     }
 }

@@ -14,5 +14,6 @@ namespace BusinessLogic.DTO
         public string Client { get; set; }
         public string Product { get; set; }
         public double Amount { get; set; }
+        public string FileNameProcessed { get; set; }
     }
 }

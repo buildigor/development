@@ -29,9 +29,19 @@ namespace BusinessLogic
             _logger = LogManager.GetCurrentClassLogger();
            if (!Directory.Exists(_serverFolder))
             {
-                Directory.CreateDirectory(_serverFolder);
-              //  _logger.Info("Directory {0} created",_serverFolder);
-                LoggerHelper.Message(string.Format("Directory {0} created",_serverFolder));
+                try
+                {
+                    Directory.CreateDirectory(_serverFolder);
+                    //  _logger.Info("Directory {0} created",_serverFolder);
+                    LoggerHelper.Message(string.Format("Directory {0} created", _serverFolder));
+                }
+                catch (Exception e)
+                {
+
+                    LoggerHelper.Error(string.Format("Directory {0} not created {1}", _serverFolder,e.Message));
+                    return;
+                }
+
             }
            _watcher = new FileSystemWatcher(_serverFolder, "*.csv");
            _watcher.Created += _watcher_Created;
@@ -86,6 +96,7 @@ namespace BusinessLogic
                         Client = splitSale[1].Trim(),
                         Product = splitSale[2].Trim(),
                         Amount = Convert.ToDouble(splitSale[3].Trim()),
+                        FileNameProcessed = fileName
                     };
                     salesCollection.Add(saleDto);
                 }
@@ -132,6 +143,8 @@ namespace BusinessLogic
                     _repositoryWorker.AddSale(sale);
                 }
                 MoveFile(e.FullPath, _doneFolder);
+                _repositoryWorker.AddCsvFileProcessedInfo(e.Name);
+                LoggerHelper.Message(string.Format("File: {0} processed successfully", e.Name));
             });
             task.Start();
         }

@@ -16,6 +16,7 @@ namespace DAL
       private ManagerRepository _managerRepository;
       private ProductRepository _productRepository;
       private SaleInfoRepository _saleInfoRepository;
+      private CsvWorkerInfoRepository _csvWorkerInfoRepository;
       public UnitOfWork()
       {
           _context = new DataModelContainer();
@@ -24,6 +25,7 @@ namespace DAL
       public IRepository<Models.Manager> Managers { get { return _managerRepository ?? (_managerRepository = new ManagerRepository(_context)); } }
       public IRepository<Models.Product> Products { get { return _productRepository ?? (_productRepository = new ProductRepository(_context)); } }
       public IRepository<Models.SaleInfo> SalesInfo { get { return _saleInfoRepository ?? (_saleInfoRepository = new SaleInfoRepository(_context)); } }
+      public IRepository<Models.CsvWorkerInfo> CsvsWorkerInfo { get { return _csvWorkerInfoRepository ?? (_csvWorkerInfoRepository = new CsvWorkerInfoRepository(_context)); } }
       public void Save()
       {
           _context.SaveChanges();

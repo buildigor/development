@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/08/2017 11:59:18
--- Generated from EDMX file: G:\epam\Projects\vanovich\Task4\Model\DataModel.edmx
+-- Date Created: 06/11/2017 18:21:01
+-- Generated from EDMX file: g:\epam\Projects\vanovich\Task4\Model\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [Sales];
+USE [SalesDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,11 +17,35 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ManagerSaleInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleInfoes] DROP CONSTRAINT [FK_ManagerSaleInfo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClientSaleInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleInfoes] DROP CONSTRAINT [FK_ClientSaleInfo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductSaleInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleInfoes] DROP CONSTRAINT [FK_ProductSaleInfo];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Managers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Managers];
+GO
+IF OBJECT_ID(N'[dbo].[Clients]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Clients];
+GO
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[SaleInfoes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SaleInfoes];
+GO
+IF OBJECT_ID(N'[dbo].[CsvWorkerInfoes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CsvWorkerInfoes];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -62,7 +86,8 @@ GO
 -- Creating table 'CsvWorkerInfoes'
 CREATE TABLE [dbo].[CsvWorkerInfoes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [FileNameDone] nvarchar(max)  NOT NULL
+    [FileNameProcessed] nvarchar(max)  NOT NULL,
+    [DateProcessed] datetime  NOT NULL
 );
 GO
 
