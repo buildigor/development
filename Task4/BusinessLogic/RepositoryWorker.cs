@@ -69,14 +69,14 @@ namespace BusinessLogic
 
        public void AddCsvFileProcessedInfo(string csvProcessed)
        {
-           var csvProcessedInfo = new CsvWorkerInfo()
-           {
-               DateProcessed = DateTime.Now,
-               FileNameProcessed = csvProcessed
-           };
-           _unitOfWork.CsvsWorkerInfo.Create(csvProcessedInfo);
            lock (_objLock)
            {
+               var csvProcessedInfo = new CsvWorkerInfo()
+               {
+                   DateProcessed = DateTime.Now,
+                   FileNameProcessed = csvProcessed
+               };
+               _unitOfWork.CsvsWorkerInfo.Create(csvProcessedInfo);
                _unitOfWork.Save();
            }
        }

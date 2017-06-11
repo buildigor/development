@@ -125,7 +125,7 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
-                LoggerHelper.Error(string.Format("File Move error: {0}", e));
+                LoggerHelper.Error(string.Format("File {0} Move error: {1}",fileName, e));
                // Console.WriteLine("File Move error: {0}", e);
             }
 
@@ -142,6 +142,7 @@ namespace BusinessLogic
                 {
                     _repositoryWorker.AddSale(sale);
                 }
+                LoggerHelper.Message(string.Format("Start moved file: {0}", e.Name));
                 MoveFile(e.FullPath, _doneFolder);
                 _repositoryWorker.AddCsvFileProcessedInfo(e.Name);
                 LoggerHelper.Message(string.Format("File: {0} processed successfully", e.Name));
