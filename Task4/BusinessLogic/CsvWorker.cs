@@ -152,16 +152,16 @@ namespace BusinessLogic
 
         public void RunWatch()
         {
-            LoggerHelper.Message(string.Format("Start watсhing folder {0}", _serverFolder));
-           // Console.WriteLine("Start watсhing folder {0}",_serverFolder);
             _watcher.EnableRaisingEvents = true;
+            LoggerHelper.Message(string.Format("Start watсhing folder {0}", _serverFolder));
+           // Console.WriteLine("Start watсhing folder {0}",_serverFolder); 
         }
 
         public void StopWatch()
         {
+            _watcher.EnableRaisingEvents = false;
             LoggerHelper.Message("Watching Stopped");
            // Console.WriteLine("Watching Stopped");
-            _watcher.EnableRaisingEvents = false;
         }
 
         public void Dispose()
