@@ -18,11 +18,10 @@ namespace CsvWatcherService
         {
             InitializeComponent();
             serviceInstaller = new ServiceInstaller();
-            processInstaller = new ServiceProcessInstaller();
+            processInstaller = new ServiceProcessInstaller {Account = ServiceAccount.LocalSystem};
 
-            processInstaller.Account = ServiceAccount.LocalSystem;
             serviceInstaller.StartType = ServiceStartMode.Manual;
-            serviceInstaller.ServiceName = "CsvWatcherService";
+            serviceInstaller.ServiceName = "CsvWatcherService1";
             Installers.Add(processInstaller);
             Installers.Add(serviceInstaller);
         }

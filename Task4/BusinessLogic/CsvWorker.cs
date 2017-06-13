@@ -58,7 +58,6 @@ namespace BusinessLogic
             {
                 managerName = fileNameSplit[0];
                 LoggerHelper.Message(string.Format("File name {0} format is valid", fileName));
-               // Console.WriteLine("File name {0} format is valid",fileName);
             }
             else
             {
@@ -66,12 +65,10 @@ namespace BusinessLogic
                 {
                     managerName = fileNameSplit[1];
                     LoggerHelper.Message(string.Format("File name {0} format is valid but order is confused", fileName));
-                   // Console.WriteLine("File name {0} format is valid but order is confused",fileName);
                 }
                 else
                 {
                     LoggerHelper.Message(string.Format("File name {0} format is not correct, expected format: \"Lastname_ddmmyyyy\"", fileName));
-                   // Console.WriteLine("File name {0} format is not correct, expected format: \"Lastname_ddmmyyyy\"",fileName);
                     MoveFile(path,_notDoneFolder);
                     return null;
                 }
@@ -120,18 +117,17 @@ namespace BusinessLogic
                 {
                     File.Move(path, destFileName);
                     LoggerHelper.Message(string.Format("File {1} moved to: {0}", destpath, fileName));
-                   // Console.WriteLine("File {1} moved to: {0}", destpath, fileName);
                 }
             }
             catch (Exception e)
             {
                 LoggerHelper.Error(string.Format("File {0} Move error: {1}",fileName, e));
-               // Console.WriteLine("File Move error: {0}", e);
             }
 
                 
         }
-        void  _watcher_Created(object sender, FileSystemEventArgs e)
+
+        private void  _watcher_Created(object sender, FileSystemEventArgs e)
         {
             LoggerHelper.Message(string.Format("Created new file: {0}", e.Name));
             var task = new Task(() =>
@@ -154,14 +150,12 @@ namespace BusinessLogic
         {
             _watcher.EnableRaisingEvents = true;
             LoggerHelper.Message(string.Format("Start watсhing folder {0}", _serverFolder));
-           // Console.WriteLine("Start watсhing folder {0}",_serverFolder); 
         }
 
         public void StopWatch()
         {
             _watcher.EnableRaisingEvents = false;
             LoggerHelper.Message("Watching Stopped");
-           // Console.WriteLine("Watching Stopped");
         }
 
         public void Dispose()
