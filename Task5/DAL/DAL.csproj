@@ -76,16 +76,10 @@
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IClientRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IManagerRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IProductRepository.cs" />
-    <Compile Include="Repositories\Interfaces\ISellingRepository.cs" />
-    <Compile Include="Repositories\ManagerRepository.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
-    <Compile Include="Repositories\SellingRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Selling.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
