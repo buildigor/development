@@ -1,0 +1,24 @@
+﻿@model System.Collections.Generic.IList<WebStatistic.Models.WorkModels.ManagerModels>
+
+@{
+    ViewBag.Title = "AllManagers";
+}
+<h2>All Managers</h2>
+<p>
+    @Html.ActionLink("Add new selling", "Create")
+</p>
+<table class="table">
+    <tr>
+    </tr>
+    @foreach (var manager in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(list => manager.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = manager.Id })
+            </td>
+        </tr>
+    }
+</table>
