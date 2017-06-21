@@ -10,7 +10,7 @@ namespace WebStatistic.Models.WorkModels
     {
         public int Id { get; set; }
         [Required]
-       // [RegularExpression(@"[A-Za-z]", ErrorMessage = "Must be only letters")]
+        [RegularExpression(@"^[A-Za-z]+$", ErrorMessage = "Must be only letters")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "The length of the string must be greater than 1 character")]
         [Display(Name = "Manager")]
         public string ManagerName { get; set; }
