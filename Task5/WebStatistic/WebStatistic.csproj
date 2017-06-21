@@ -234,7 +234,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Views\Manager\AllManagers.cshtml" />
     <None Include="Views\Manager\Create.cshtml" />
+    <None Include="Views\Manager\Delete.cshtml" />
     <None Include="Views\Manager\Details.cshtml" />
+    <None Include="Views\Manager\Edit.cshtml" />
     <None Include="Views\Manager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

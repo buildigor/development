@@ -15,6 +15,6 @@ namespace BL
         SellingModel GetOneSelling(int id);
         void AddNew(SellingModel sellingModel);
         void Update(SellingModel sellingModel);
-        void Delete(SellingModel sellingModel);
+        void Delete(int id);
     }
 }

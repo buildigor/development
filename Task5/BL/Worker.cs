@@ -93,9 +93,9 @@ namespace BL
             _unitOfWork.SellingRepository.Update(sellingEdit);
         }
 
-        public void Delete(SellingModel sellingModel)
+        public void Delete(int id)
         {
-            var sellingDelete = _unitOfWork.SellingRepository.GetOne(x => x.Id == sellingModel.Id);
+            var sellingDelete = _unitOfWork.SellingRepository.GetOne(x => x.Id == id);
             _unitOfWork.SellingRepository.Delete(sellingDelete.Id);
         }
     }

@@ -36,7 +36,7 @@ namespace WebStatistic.Controllers
         public ActionResult Details(int id)
         {
             var sellings = _worker.GetAllOrdersForManager(id);
-            IList<SellingModels> sellingModelsList = sellings.Select(ExtensionsMethod.ToSellingModels).ToList();
+            IList<SellingModels> sellingModelsList = sellings.Select(ToSellingModels).ToList();
             return View(sellingModelsList);
         }
         public ActionResult Create()
@@ -48,6 +48,7 @@ namespace WebStatistic.Controllers
        // [Authorize]
         public ActionResult Create([Bind(Include = "ClientName,ProductName,Date,Cost,ManagerName")] FormCollection collection)
         {
+            if (!ModelState.IsValid) return View();
             try
             {
                 _worker.AddNew(new SellingModel()
@@ -67,20 +68,69 @@ namespace WebStatistic.Controllers
                 return View();
             }
         }
-        public static class ExtensionsMethod
+       // [Authorize]
+        public ActionResult Edit(int id)
         {
-            public static SellingModels ToSellingModels(SellingModel viewSellingModel)
+            var content = _worker.GetOneSelling(id);
+            return View(ToSellingModels(content));
+        }
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "ClientName,ProductName,Date,Cost,Id")] FormCollection content)
+        {
+            if (!ModelState.IsValid) return View();
+            try
             {
-                return new SellingModels()
+                _worker.Update(new SellingModel()
                 {
-                    Id = viewSellingModel.Id,
-                    ManagerName = viewSellingModel.ManagerName,
-                    ClientName = viewSellingModel.ClientName,
-                    Date = viewSellingModel.Date.Date,
-                    ProductName = viewSellingModel.ProductName,
-                    Cost = viewSellingModel.Cost
-                };
+                    Id = Convert.ToInt32(content["Id"]),
+                    ClientName = content["ClientName"],
+                    ProductName = content["ProductName"],
+                    Date = Convert.ToDateTime(content["Date"]),
+                    Cost = Convert.ToDouble(content["Cost"])
+                });
+                return RedirectToAction("AllManagers");
+
+
+            }
+            catch (Exception e)
+            {
+                return View();
             }
         }
+       // [Authorize]
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                _worker.Delete(id);
+                return RedirectToAction("AllManagers");
+
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public SellingModels ToSellingModels(SellingModel viewSellingModel)
+        {
+            return new SellingModels()
+            {
+                Id = viewSellingModel.Id,
+                ManagerName = viewSellingModel.ManagerName,
+                ClientName = viewSellingModel.ClientName,
+                Date = viewSellingModel.Date.Date,
+                ProductName = viewSellingModel.ProductName,
+                Cost = viewSellingModel.Cost
+            };
+        }
+
     }
 }

@@ -1,24 +1,25 @@
-﻿@model System.Collections.Generic.IList<WebStatistic.Models.WorkModels.SellingModels>
+﻿@model IEnumerable<WebStatistic.Models.WorkModels.SellingModels>
 
-<p>
+<h4>
+    <br/>
     @Html.ActionLink("Create New", "Create")
-</p>
+</h4>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model=>model)
+            @Html.DisplayNameFor(model=>model.ManagerName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model)
+            @Html.DisplayNameFor(model => model.ClientName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model)
+            @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model)
+            @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model)
+            @Html.DisplayNameFor(model => model.Cost)
         </th>
         <th></th>
     </tr>
