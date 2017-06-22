@@ -68,7 +68,8 @@ namespace WebStatistic.Controllers
                 return View();
             }
         }
-       // [Authorize]
+        [Authorize(Roles = "admin")]
+
         public ActionResult Edit(int id)
         {
             var content = _worker.GetOneSelling(id);

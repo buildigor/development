@@ -41,11 +41,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            
+@if (User.IsInRole("admin"))
+{
+    <td>
+        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+    </td>
+}
+else
+{
+  <td></td>
+}
+
         </tr>
     }
 </table>
