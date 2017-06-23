@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BL;
 using BL.Models;
+using BL.SpecificationForSearch;
 using WebStatistic.Models.WorkModels;
 
 namespace WebStatistic.Controllers
@@ -101,7 +102,9 @@ namespace WebStatistic.Controllers
        // [Authorize]
         public ActionResult Delete(int id)
         {
-            return View();
+            var sellingForDelete = _worker.GetOneSelling(id);
+            ViewBag.DeleteSelling = sellingForDelete;
+            return View(ToSellingModels(sellingForDelete));
         }
 
 
@@ -119,6 +122,27 @@ namespace WebStatistic.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult Search(FormCollection collection)
+        {
+            DateTime date;
+            DateTime.TryParse(collection["Date"], out date);
+            DateTime dateSearch = date;
+            var content = _worker.Search(new SearchSpecification()
+            {
+                ProductName = collection["ProductName"],
+                ClientName = collection["ClientName"],
+                ManagerName = collection["ManagerName"],
+                Date = dateSearch
+            });
+            IList<SellingModels> listsSellingModels = content.Select(ToSellingModels).ToList();
+            return View("Details", listsSellingModels);
         }
         public SellingModels ToSellingModels(SellingModel viewSellingModel)
         {

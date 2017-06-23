@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/15/2017 22:36:46
--- Generated from EDMX file: G:\epam\Projects\vanovich\DAL\DAL\DbModel.edmx
+-- Date Created: 06/23/2017 14:31:02
+-- Generated from EDMX file: g:\epam\Projects\vanovich\Task5\DAL\DbModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,32 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ManagerSelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sellings] DROP CONSTRAINT [FK_ManagerSelling];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClientSelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sellings] DROP CONSTRAINT [FK_ClientSelling];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductSelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sellings] DROP CONSTRAINT [FK_ProductSelling];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Managers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Managers];
+GO
+IF OBJECT_ID(N'[dbo].[Clients]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Clients];
+GO
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[Sellings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sellings];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -121,10 +142,10 @@ ON [dbo].[Sellings]
     ([ClientId]);
 GO
 
--- Creating foreign key on [ManagerId] in table 'Sellings'
+-- Creating foreign key on [ProductId] in table 'Sellings'
 ALTER TABLE [dbo].[Sellings]
 ADD CONSTRAINT [FK_ProductSelling]
-    FOREIGN KEY ([ManagerId])
+    FOREIGN KEY ([ProductId])
     REFERENCES [dbo].[Products]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -133,7 +154,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProductSelling'
 CREATE INDEX [IX_FK_ProductSelling]
 ON [dbo].[Sellings]
-    ([ManagerId]);
+    ([ProductId]);
 GO
 
 -- --------------------------------------------------

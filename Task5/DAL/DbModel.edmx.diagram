@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8663a4134f254b6fba7b1a47028d725c" Name="Diagram1" >
-        <EntityTypeShape EntityType="DbModel.Manager" Width="1.5" PointX="6.75" PointY="1.5" />
-        <EntityTypeShape EntityType="DbModel.Client" Width="1.5" PointX="9.75" PointY="1.5" />
-        <EntityTypeShape EntityType="DbModel.Product" Width="1.5" PointX="13" PointY="1.5" />
-        <EntityTypeShape EntityType="DbModel.Selling" Width="1.5" PointX="9.5" PointY="4.125" />
+        <EntityTypeShape EntityType="DbModel.Manager" Width="1.5" PointX="3.875" PointY="1.5" />
+        <EntityTypeShape EntityType="DbModel.Client" Width="1.5" PointX="10" PointY="0.5" />
+        <EntityTypeShape EntityType="DbModel.Product" Width="1.5" PointX="14" PointY="3.25" />
+        <EntityTypeShape EntityType="DbModel.Selling" Width="1.5" PointX="9" PointY="3.375" />
         <AssociationConnector Association="DbModel.ManagerSelling" />
         <AssociationConnector Association="DbModel.ClientSelling" />
         <AssociationConnector Association="DbModel.ProductSelling" />

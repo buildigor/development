@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.Models;
+using BL.SpecificationForSearch;
 using DAL;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
@@ -97,6 +98,11 @@ namespace BL
         {
             var sellingDelete = _unitOfWork.SellingRepository.GetOne(x => x.Id == id);
             _unitOfWork.SellingRepository.Delete(sellingDelete.Id);
+        }
+
+        public IEnumerable<SellingModel> Search(SearchSpecification searchSpecification)
+        {
+            return searchSpecification.SatisfiedBy(GetAllSellings());
         }
     }
 }

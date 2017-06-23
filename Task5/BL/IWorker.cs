@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.Models;
+using BL.SpecificationForSearch;
 
 namespace BL
 {
@@ -16,5 +17,6 @@ namespace BL
         void AddNew(SellingModel sellingModel);
         void Update(SellingModel sellingModel);
         void Delete(int id);
+        IEnumerable<SellingModel> Search(SearchSpecification specification);
     }
 }

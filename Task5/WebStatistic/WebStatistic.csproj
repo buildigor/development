@@ -239,6 +239,7 @@
     <None Include="Views\Manager\Details.cshtml" />
     <None Include="Views\Manager\Edit.cshtml" />
     <None Include="Views\Manager\Index.cshtml" />
+    <None Include="Views\Manager\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

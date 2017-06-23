@@ -87,7 +87,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Selling">
-        <PropertyRef Name="ManagerId" />
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -183,7 +183,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Selling">
-              <PropertyRef Name="ManagerId" />
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -4,13 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2><span class="alert-danger">Are you sure that you want to delete the sales line for manager - "@Model.ManagerName"?</span></h2>
+<h4><em>(Client: @Model.ClientName, Product: @Model.ProductName, Date: @Model.Date, Cost: @Model.Cost)</em></h4>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        @Html.ActionLink("Back to List", "Index")
+    <div class="form-actions">
+        <input type="submit" value="Delete" class="btn btn-primary btn-lg" />
+        <br/>
+       <h4>@Html.ActionLink("Back to List", "AllManagers")</h4> 
     </div>
 }

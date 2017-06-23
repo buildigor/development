@@ -15,14 +15,14 @@ namespace WebStatistic.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Application about selling statistic.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "My contact buildigor@gmail.com.";
 
             return View();
         }

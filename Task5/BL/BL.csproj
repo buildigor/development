@@ -48,7 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SpecificationForSearch\ClientSpecification.cs" />
+    <Compile Include="SpecificationForSearch\DateSpecification.cs" />
+    <Compile Include="SpecificationForSearch\ISellingSpecification.cs" />
+    <Compile Include="SpecificationForSearch\ISpecification.cs" />
     <Compile Include="IWorker.cs" />
+    <Compile Include="SpecificationForSearch\ManagerSpecification.cs" />
+    <Compile Include="SpecificationForSearch\ProductSpecification.cs" />
+    <Compile Include="SpecificationForSearch\SearchSpecification.cs" />
     <Compile Include="ToModelConverter.cs" />
     <Compile Include="Worker.cs" />
     <Compile Include="Models\ClientModel.cs" />
