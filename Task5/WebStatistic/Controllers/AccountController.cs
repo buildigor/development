@@ -404,6 +404,12 @@ namespace WebStatistic.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Authentification(string returnUrl)
+        {
+            ViewBag.returnUrl = returnUrl;
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

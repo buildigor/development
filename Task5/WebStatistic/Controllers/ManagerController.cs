@@ -40,13 +40,14 @@ namespace WebStatistic.Controllers
             IList<SellingModels> sellingModelsList = sellings.Select(ToSellingModels).ToList();
             return View(sellingModelsList);
         }
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
         // POST: Manager/Create
         [HttpPost]
-       // [Authorize]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ClientName,ProductName,Date,Cost,ManagerName")] FormCollection collection)
         {
             if (!ModelState.IsValid) return View();

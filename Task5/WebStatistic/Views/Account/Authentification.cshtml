@@ -1,0 +1,22 @@
+﻿@using System.Runtime.Remoting.Messaging
+
+@{
+    ViewBag.Title = "Authentification";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<h1>Authentification</h1>
+    <h3>To access the content you must @Ajax.ActionLink("register", "Register",new { ViewBag.returnUrl },new AjaxOptions()
+                                       {
+                                           HttpMethod = "GET",
+                                           UpdateTargetId = "auth",
+                                           InsertionMode = InsertionMode.Replace
+                                       }) or @Ajax.ActionLink("sign in", "Login", new {  ViewBag.returnUrl }, new AjaxOptions()
+                                             {
+                                                 HttpMethod = "GET",
+                                                 UpdateTargetId = "auth",
+                                                 InsertionMode = InsertionMode.Replace
+                                                 
+                                             })...</h3>
+
+<div id="auth"></div>
