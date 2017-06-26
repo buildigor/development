@@ -101,6 +101,7 @@ namespace WebStatistic.Controllers
             }
         }
        // [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             var sellingForDelete = _worker.GetOneSelling(id);
