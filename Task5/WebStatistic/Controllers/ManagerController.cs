@@ -116,8 +116,6 @@ namespace WebStatistic.Controllers
             {
                 _worker.Delete(id);
                 return RedirectToAction("AllManagers");
-
-
             }
             catch
             {
