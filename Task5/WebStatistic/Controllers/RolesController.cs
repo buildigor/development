@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using WebStatistic.Models;
 
 namespace WebStatistic.Controllers
@@ -11,6 +14,19 @@ namespace WebStatistic.Controllers
     [Authorize(Roles = "admin")]
     public class RolesController : Controller
     {
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+   
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         // GET: Roles
         public ActionResult Index()
@@ -85,13 +101,14 @@ namespace WebStatistic.Controllers
         public ActionResult RoleAddToUser(string userName, string roleName)
         {
             var user = _context.Users.FirstOrDefault(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase));
-            var account = new AccountController();
-            if (user != null) account.UserManager.AddToRole(user.Id, roleName);
+           // AccountController account = new AccountController {ControllerContext = ControllerContext};
+            if (user != null) UserManager.AddToRole(user.Id, roleName);
 
-            ViewBag.ResultMessage = "Role created successfully !";
-            var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(x=> new SelectListItem { Value = x.Name.ToString(), Text = x.Name }).ToList();
+            ViewBag.ResultMessage = string.Format("Role {0} for {1} created successfully!",roleName,user.UserName);
+            var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(x => new SelectListItem { Value = x.Name.ToString(), Text = x.Name }).ToList();
             ViewBag.Roles = list;
 
+            ViewBag.RolesForThisUser = UserManager.GetRolesAsync(user.Id).Result;
             return View("ManageUserRoles");
         }
 
@@ -99,17 +116,17 @@ namespace WebStatistic.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteRoleForUser(string userName, string roleName)
         {
-            var account = new AccountController();
+
             ApplicationUser user = _context.Users.FirstOrDefault(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase));
 
-            if (user != null && account.UserManager.IsInRole(user.Id, roleName))
+            if (user != null && UserManager.IsInRole(user.Id, roleName))
             {
-                account.UserManager.RemoveFromRole(user.Id, roleName);
-                ViewBag.ResultMessage = "Role removed from this user successfully !";
+                UserManager.RemoveFromRole(user.Id, roleName);
+                ViewBag.ResultOfDeleteMessage = string.Format("Role {0} removed from user {1} successfully!",roleName,user.UserName);
             }
             else
             {
-                ViewBag.ResultMessage = "This user doesn't belong to selected role.";
+                ViewBag.ResultOfDeleteMessage = "This user doesn't belong to selected role.";
             }
             var list = _context.Roles.OrderBy(r => r.Name).ToList().Select(x => new SelectListItem { Value = x.Name.ToString(), Text = x.Name }).ToList();
             ViewBag.Roles = list;

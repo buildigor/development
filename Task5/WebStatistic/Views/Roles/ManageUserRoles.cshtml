@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "ManageUserRoles";
+    ViewBag.Title = "Manage User Roles";
 }
 <h2>Manage User Roles</h2>
 @Html.ActionLink("Create New Role", "Create") | @Html.ActionLink("Manage User Role", "ManageUserRoles")
@@ -15,13 +15,16 @@
         Role Name: @Html.DropDownList("roleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
     </p>
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Save"/>
+    <br/>
+    <p style="color: darkgreen"> @ViewBag.ResultMessage</p>
+    
 }
 <hr />
 @if (ViewBag.RolesForThisUser != null)
 {
-    <div style="background-color:yellow;">
-        <h3>Roles for this user </h3>
+    <div style="background-color:antiquewhite;">
+        <h3 style="color: cornflowerblue" >Roles for this user </h3>
         <ol>
             @foreach (string s in ViewBag.RolesForThisUser)
             {
@@ -42,5 +45,7 @@
         Role Name: @Html.DropDownList("roleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
     </p>
 
-    <input type="submit" value="Delete this user from Role" />
+    <input type="submit" value="Delete this user from Role"/>
+    <br/>
+    <p style ="color: darkgreen">@ViewBag.ResultOfDeleteMessage</p>
 }
