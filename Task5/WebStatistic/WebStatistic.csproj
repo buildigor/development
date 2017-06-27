@@ -251,6 +251,7 @@
     <None Include="Views\Roles\Edit.cshtml" />
     <None Include="Views\Roles\Index.cshtml" />
     <None Include="Views\Roles\ManageUserRoles.cshtml" />
+    <Content Include="Views\Roles\UsersInRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

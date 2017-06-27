@@ -26,7 +26,16 @@ namespace WebStatistic.Controllers
                 _userManager = value;
             }
         }
-   
+
+        private RoleManager<IdentityRole> _roleManager;
+        public RoleManager<IdentityRole> RoleManager
+        {
+            get { return _roleManager ?? HttpContext.GetOwinContext().Get<RoleManager<IdentityRole>>(); }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         // GET: Roles
         public ActionResult Index()
@@ -132,6 +141,18 @@ namespace WebStatistic.Controllers
             ViewBag.Roles = list;
 
             return View("ManageUserRoles");
+        }
+        
+        public ActionResult UsersOfRole(string roleName)
+        {
+            var identityRole = _context.Roles.FirstOrDefault(x => x.Name == roleName);
+            if (identityRole != null)
+            {
+                var roleId = identityRole.Id;
+                var users = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(roleId)).Select(x=>x.UserName).ToList();
+                ViewBag.Users = users;
+            }
+            return View("UsersInRole");
         }
     }
 }
