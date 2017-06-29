@@ -151,6 +151,7 @@ namespace WebStatistic.Controllers
                 var roleId = identityRole.Id;
                 var users = _context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(roleId)).Select(x=>x.UserName).ToList();
                 ViewBag.Users = users;
+                ViewBag.RoleName = roleName;
             }
             return View("UsersInRole");
         }

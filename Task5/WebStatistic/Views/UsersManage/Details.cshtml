@@ -1,0 +1,27 @@
+﻿@model WebStatistic.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+
+<h4>Roles for  user - @Html.DisplayFor(model => model.UserName)</h4>
+@if (ViewBag.Roles.Count == 0)
+{
+    <hr />
+    <p>No roles found for this user.</p>
+}
+<table class="table">
+    @foreach (var item in ViewBag.Roles)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -15,17 +15,20 @@
             </strong>
             @Ajax.ActionLink("View users in this role", "UsersOfRole", "Roles",new{RoleName=@role.Name}, new AjaxOptions()
        {
-           UpdateTargetId = "divforusers",
-           LoadingElementDuration = 1000,
-           LoadingElementId = "loading"
+           
+           
+           LoadingElementId = "loading",
+           UpdateTargetId = "divforusers"
        })
             
             <span onclick="return confirm('Are you sure you want to delete?')"><a href="/Roles/Delete?RoleName=@role.Name" class="delLink" style="color: red;">Delete</a></span>
         </p>
     }
-    @Ajax.ActionLink("Create Role", "Create", new AjaxOptions() {UpdateTargetId = "divforcreate", InsertionMode = InsertionMode.Replace})
+    <h4>  @Ajax.ActionLink("Create Role", "Create", new AjaxOptions() { UpdateTargetId = "divforcreate", InsertionMode = InsertionMode.Replace })</h4>
 
 </div>
-
+<div id="loading" class="load" style="display:none">
+    <p>Loading...</p>
+</div>
 <div id="divforusers"></div>
 <div id="divforcreate"></div>
