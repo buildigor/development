@@ -11,6 +11,7 @@ using WebStatistic.Models;
 
 namespace WebStatistic.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UsersManageController : Controller
     {
         private ApplicationUserManager _userManager;
