@@ -10,21 +10,23 @@
     @foreach (var  role in Model)
     {
         <p>
+            <li>
             <strong>
                 @role.Name
             </strong>
-            @Ajax.ActionLink("View users in this role", "UsersOfRole", "Roles",new{RoleName=@role.Name}, new AjaxOptions()
-       {
-           
-           
-           LoadingElementId = "loading",
-           UpdateTargetId = "divforusers"
-       })
-            
+            @Ajax.ActionLink("View users in this role", "UsersOfRole", "Roles", new {RoleName = @role.Name}, new AjaxOptions()
+            {
+
+
+                LoadingElementId = "loading",
+                UpdateTargetId = "divforusers"
+            })
+
             <span onclick="return confirm('Are you sure you want to delete?')"><a href="/Roles/Delete?RoleName=@role.Name" class="delLink" style="color: red;">Delete</a></span>
+            </li>
         </p>
     }
-    <h4>  @Ajax.ActionLink("Create Role", "Create", new AjaxOptions() { UpdateTargetId = "divforcreate", InsertionMode = InsertionMode.Replace })</h4>
+    <h4>  @Ajax.ActionLink("Create Role", "Create", new AjaxOptions() { UpdateTargetId = "divforcreate", InsertionMode = InsertionMode.Replace }) | @Html.ActionLink("Manage Roles","ManageUserRoles")</h4>
 
 </div>
 <div id="loading" class="load" style="display:none">

@@ -12,9 +12,12 @@
     </p><p>
     @if (User.IsInRole("admin"))
     {
-        <a href="/Roles/Index" class="btn btn-primary btn-lg">Users Roles in system &raquo;</a>
-    }
-    @* <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+        <a href="/Roles/Index" class="btn btn-primary btn-lg">Manage Roles&raquo;</a>
+    <p>
+        <a href="/UsersManage/Index" class="btn btn-primary btn-lg">Manage Users&raquo;</a>
+    </p>
+        }
+        @* <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 </div>
 @*
     <div class="row">

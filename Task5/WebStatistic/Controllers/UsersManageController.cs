@@ -88,5 +88,78 @@ namespace WebStatistic.Controllers
             ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
             return View();
         }
+
+        public ActionResult Edit(string id)
+        {
+            var user = UserManager.FindById(id);
+            var userRoles = UserManager.GetRoles(user.Id);
+            ViewBag.UserName = user.UserName;
+            ViewBag.UserRoles = userRoles;
+            return View(new EditUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
+                {
+                    Selected = userRoles.Contains(x.Name),
+                    Text = x.Name,
+                    Value = x.Name
+                })
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "Email,Id")] EditUserViewModel editUser,params string[] selectedRoles)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(editUser.Id);
+                user.UserName = editUser.Email;
+                user.Email = editUser.Email;
+                var userRoles = UserManager.GetRoles(user.Id);
+                selectedRoles = selectedRoles ?? new string[] {};
+                var result = UserManager.AddToRoles(user.Id, selectedRoles.Except(userRoles).ToArray<string>());
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                result = UserManager.RemoveFromRoles(user.Id, userRoles.Except(selectedRoles).ToArray<string>());
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Delete(string id)
+        {
+            ApplicationUser user = UserManager.FindById(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+        [HttpPost,ActionName("Delete")]
+        public ActionResult DeleteUser(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                var result = UserManager.Delete(user);
+                if (result.Succeeded) return RedirectToAction("Index");
+                ModelState.AddModelError("", result.Errors.First());
+                return View();
+            }
+            return View();
+        }
     }
 }

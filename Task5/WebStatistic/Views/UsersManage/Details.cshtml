@@ -5,23 +5,23 @@
 }
 <h2>Details</h2>
 
-<h4>Roles for  user - @Html.DisplayFor(model => model.UserName)</h4>
+<h4>Roles for user - <span style="color: blueviolet">@Html.DisplayFor(model => model.UserName)</span></h4>
 @if (ViewBag.Roles.Count == 0)
 {
     <hr />
     <p>No roles found for this user.</p>
 }
-<table class="table">
+
     @foreach (var item in ViewBag.Roles)
     {
-        <tr>
-            <td>
-                @item
-            </td>
-        </tr>
+        <li>
+            @item
+        </li>
     }
-</table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<h4>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</h4>

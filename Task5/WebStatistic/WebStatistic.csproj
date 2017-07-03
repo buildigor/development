@@ -254,7 +254,9 @@
     <None Include="Views\Roles\ManageUserRoles.cshtml" />
     <Content Include="Views\Roles\UsersInRole.cshtml" />
     <None Include="Views\UsersManage\Create.cshtml" />
+    <None Include="Views\UsersManage\Delete.cshtml" />
     <None Include="Views\UsersManage\Details.cshtml" />
+    <None Include="Views\UsersManage\Edit.cshtml" />
     <None Include="Views\UsersManage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
